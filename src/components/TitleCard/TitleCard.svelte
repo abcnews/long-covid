@@ -18,7 +18,7 @@
         if (type === 'progress') {
           const thresholdProgress = (data as Progress).threshold;
 
-          if (!hasRun && thresholdProgress >= 0.05) {
+          if (!hasRun && thresholdProgress >= 0.025) {
             hasRun = true;
             const stopSimulation = runSimulation();
 
