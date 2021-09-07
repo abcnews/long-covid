@@ -8,14 +8,9 @@
   let graphicEl: HTMLElement;
 
   onMount(() => {
-    const mountEl = el.parentElement;
-
-    if (mountEl) {
-      mountEl.classList.add('u-full');
-    }
+    const runSimulation = createSimuation(graphicEl);
 
     let hasRun = false;
-    const runSimulation = createSimuation(graphicEl);
 
     return subscribe(
       'titlecard',
@@ -32,7 +27,7 @@
         }
       },
       {
-        indicatorSelector: '#titlecard',
+        indicatorSelector: '.Header-media > :first-child',
         regionThreshold: 0
       }
     );

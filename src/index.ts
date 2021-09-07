@@ -8,11 +8,21 @@ import './global.css';
 const dependencies = [proxy('long-covid'), whenOdysseyLoaded];
 
 Promise.all(dependencies).then(() => {
-  const [titleCardMount] = selectMounts('titlecard');
+  const headerEl = document.querySelector('.Header');
 
-  if (titleCardMount) {
+  if (headerEl) {
+    let headerMediaEl = headerEl.querySelector('.Header-media');
+
+    if (headerMediaEl) {
+      headerMediaEl.innerHTML = '';
+    } else {
+      headerMediaEl = document.createElement('div');
+      headerMediaEl.classList.add('Header-media');
+      headerEl.insertBefore(headerMediaEl, headerEl.firstChild);
+    }
+
     new TitleCard({
-      target: titleCardMount,
+      target: headerMediaEl,
       props: {}
     });
   }
