@@ -1,0 +1,19 @@
+:root {
+  --bg: #000 !important;
+}
+
+[data-component='SiteNavWithOverflow'] {
+  display: none;
+}
+
+.Main {
+  background-color: #fff;
+}
+
+.Main .Header h1 {
+  display: none;
+}
+
+.Main .Header-content {
+  padding-top: 60px;
+}
