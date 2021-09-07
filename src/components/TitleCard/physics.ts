@@ -5,7 +5,13 @@ const WIDTH = 1440;
 const HEIGHT = 1440;
 const TYPOGRAPHY_OFFSET_X = (WIDTH - TYPOGRAPHY_WIDTH) / 2;
 const TYPOGRAPHY_OFFSET_Y = (HEIGHT - TYPOGRAPHY_HEIGHT) / 6;
-const CHARACTERS_CONFIGS = TYPOGRAPHY_CHARACTERS.map(datum => {
+const CHARACTERS_CONFIGS = TYPOGRAPHY_CHARACTERS.map((datum, index) => {
+  if (index < 11) {
+    return {
+      ...datum
+    };
+  }
+
   const pathEl = document.createElementNS('http://www.w3.org/2000/svg', 'path');
 
   pathEl.setAttribute('d', datum.d);
@@ -65,7 +71,7 @@ const createUphillTriangle = (x: number, y: number, width: number, height: numbe
 export const createSimuation = (el: HTMLElement) => {
   const engine = Engine.create({
     gravity: {
-      // scale: 0.0015
+      scale: 0.00125
     }
   });
   const render = Render.create({
@@ -104,22 +110,29 @@ export const createSimuation = (el: HTMLElement) => {
       }
     }
   });
-  const characters = CHARACTERS_CONFIGS.map((config, index) => {
+  const characters = CHARACTERS_CONFIGS.map(config => {
     const x = TYPOGRAPHY_OFFSET_X + config.x + config.w / 2;
     const y = TYPOGRAPHY_OFFSET_Y + config.y + config.h / 2;
+    const render = {
+      sprite: {
+        texture: `${__webpack_public_path__}title-card/${config.c}.svg`
+      }
+    };
+
+    if (!('vertexSet' in config)) {
+      return Bodies.rectangle(x, y, config.w, config.h, {
+        isStatic: true,
+        render
+      });
+    }
+
     const body = Bodies.fromVertices(
       x,
       y,
       [config.vertexSet],
       {
-        isStatic: index < 11,
-        render: {
-          sprite: {
-            texture: `${__webpack_public_path__}title-card/${config.c}.svg`
-          },
-          fillStyle: '#000',
-          lineWidth: 0
-        }
+        timeScale: 0.9 + Math.random() * 0.2,
+        render
       },
       true
     );
