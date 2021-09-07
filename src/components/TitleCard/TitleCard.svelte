@@ -96,7 +96,7 @@
   }
 
   figure > :global(canvas) {
-    width: 100%;
-    height: auto;
+    width: 100% !important;
+    height: 100% !important;
   }
 </style>

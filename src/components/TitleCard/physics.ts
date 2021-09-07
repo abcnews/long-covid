@@ -5,6 +5,7 @@ const WIDTH = 1440;
 const HEIGHT = 1440;
 const TYPOGRAPHY_OFFSET_X = (WIDTH - TYPOGRAPHY_WIDTH) / 2;
 const TYPOGRAPHY_OFFSET_Y = (HEIGHT - TYPOGRAPHY_HEIGHT) / 6;
+const CHARACTER_MEASUREMENT_PATH = document.createElementNS('http://www.w3.org/2000/svg', 'path');
 const CHARACTERS_CONFIGS = TYPOGRAPHY_CHARACTERS.map((datum, index) => {
   if (index < 11) {
     return {
@@ -12,17 +13,17 @@ const CHARACTERS_CONFIGS = TYPOGRAPHY_CHARACTERS.map((datum, index) => {
     };
   }
 
-  const pathEl = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+  CHARACTER_MEASUREMENT_PATH.setAttribute('d', datum.d);
 
-  pathEl.setAttribute('d', datum.d);
-
-  const config = {
+  return {
     ...datum,
-    vertexSet: Svg.pathToVertices(pathEl, 30)
+    vertexSet: Svg.pathToVertices(CHARACTER_MEASUREMENT_PATH, 30)
   };
-
-  return config;
 });
+const WIDEST_CHARACTER_WIDTH = CHARACTERS_CONFIGS.reduce(
+  (memo, characterConfig) => Math.max(memo, characterConfig.w),
+  0
+);
 const STATIC_BODY_SHARED_CONFIG = {
   isStatic: true,
   render: {
@@ -71,13 +72,14 @@ const createUphillTriangle = (x: number, y: number, width: number, height: numbe
 export const createSimuation = (el: HTMLElement) => {
   const engine = Engine.create({
     gravity: {
-      scale: 0.00125
+      scale: 0.001125
     }
   });
   const render = Render.create({
     element: el,
     engine: engine,
     options: {
+      pixelRatio: window.devicePixelRatio || 1,
       wireframes: false,
       width: WIDTH,
       height: HEIGHT,
@@ -131,7 +133,7 @@ export const createSimuation = (el: HTMLElement) => {
       y,
       [config.vertexSet],
       {
-        timeScale: 0.9 + Math.random() * 0.2,
+        frictionAir: (0.01 / WIDEST_CHARACTER_WIDTH) * config.w,
         render
       },
       true
