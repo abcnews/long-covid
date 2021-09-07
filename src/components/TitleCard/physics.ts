@@ -3,8 +3,8 @@ import { TYPOGRAPHY_CHARACTERS, TYPOGRAPHY_HEIGHT, TYPOGRAPHY_WIDTH } from './ty
 
 const WIDTH = 1440;
 const HEIGHT = 1440;
-const TYPOGRAPHY_OFFSET_X = (WIDTH / 8) * 6 - TYPOGRAPHY_WIDTH / 2;
-const TYPOGRAPHY_OFFSET_Y = (HEIGHT / 32) * 7 - TYPOGRAPHY_HEIGHT / 2;
+const TYPOGRAPHY_OFFSET_X = (WIDTH - TYPOGRAPHY_WIDTH) / 2;
+const TYPOGRAPHY_OFFSET_Y = (HEIGHT - TYPOGRAPHY_HEIGHT) / 6;
 const CHARACTERS_CONFIGS = TYPOGRAPHY_CHARACTERS.map(datum => {
   const pathEl = document.createElementNS('http://www.w3.org/2000/svg', 'path');
 
@@ -59,21 +59,15 @@ const createTriangle = (
   return body;
 };
 
-const createDownhillTriangle = (x: number, y: number, width: number, height: number, options?: {}): Body =>
-  createTriangle((width, height) => `L 0 0 L ${width} ${height} L 0 ${height}`, x, y, width, height, options);
-
 const createUphillTriangle = (x: number, y: number, width: number, height: number, options?: {}): Body =>
   createTriangle((width, height) => `L 0 ${height} L ${width} 0 L ${width} ${height}`, x, y, width, height, options);
 
 export const createSimuation = (el: HTMLElement) => {
-  // create an engine
   const engine = Engine.create({
     gravity: {
-      scale: 0.0015
+      // scale: 0.0015
     }
   });
-
-  // create a renderer
   const render = Render.create({
     element: el,
     engine: engine,
@@ -84,54 +78,35 @@ export const createSimuation = (el: HTMLElement) => {
       background: '#fff'
     }
   });
-  const downhill = createDownhillTriangle(
-    WIDTH / 16,
-    (HEIGHT / 16) * 15,
-    WIDTH / 8,
-    (HEIGHT / 16) * 2,
-    STATIC_BODY_SHARED_CONFIG
-  );
-  const floor = Bodies.rectangle(WIDTH / 2, (HEIGHT / 8) * 9, WIDTH, HEIGHT / 4, STATIC_BODY_SHARED_CONFIG);
-  const uphill = createUphillTriangle(
-    (WIDTH / 16) * 10,
-    (HEIGHT / 4) * 3,
-    (WIDTH / 8) * 4,
-    HEIGHT / 2,
-    STATIC_BODY_SHARED_CONFIG
-  );
-  const right = Bodies.rectangle((WIDTH / 16) * 15, (HEIGHT / 4) * 3, WIDTH / 8, HEIGHT / 2, STATIC_BODY_SHARED_CONFIG);
 
-  const person = Bodies.rectangle(WIDTH - 56, 624, 50, 200, {
-    // const person = Bodies.rectangle(WIDTH / 2, HEIGHT / 2, 50, 200, {
+  const base = Bodies.rectangle(WIDTH / 2, HEIGHT + 1, WIDTH, 2, STATIC_BODY_SHARED_CONFIG);
+  const hill = createUphillTriangle(
+    WIDTH / 2,
+    (HEIGHT / 16) * 13,
+    WIDTH / 3,
+    (HEIGHT / 8) * 3,
+    STATIC_BODY_SHARED_CONFIG
+  );
+  const summit = Bodies.rectangle(
+    (WIDTH / 6) * 5,
+    (HEIGHT / 16) * 13,
+    WIDTH / 3,
+    (HEIGHT / 8) * 3,
+    STATIC_BODY_SHARED_CONFIG
+  );
+  const person = Bodies.rectangle((WIDTH / 3) * 2 + 30, (HEIGHT / 8) * 5 - 210, 144, 450, {
     isStatic: true,
     render: {
       sprite: {
         xScale: 2,
         yScale: 2,
-        xOffset: 0.2,
-        yOffset: 0.05,
-        texture: `${__webpack_public_path__}title-card/person.svg`
-      },
-      fillStyle: '#000',
-      lineWidth: 0
+        texture: `${__webpack_public_path__}title-card/Person.svg`
+      }
     }
   });
-
   const characters = CHARACTERS_CONFIGS.map((config, index) => {
     const x = TYPOGRAPHY_OFFSET_X + config.x + config.w / 2;
     const y = TYPOGRAPHY_OFFSET_Y + config.y + config.h / 2;
-
-    // Simple boxes
-    // const body = Bodies.rectangle(x, y, config.w, config.h, {
-    //   render: {
-    //     lineWidth: 0,
-    //     sprite: {
-    //       texture: `${__webpack_public_path__}title-card/${config.c}.svg`
-    //     }
-    //   }
-    // });
-
-    // Polygons from vertices
     const body = Bodies.fromVertices(
       x,
       y,
@@ -155,7 +130,7 @@ export const createSimuation = (el: HTMLElement) => {
   });
 
   // add all of the bodies to the world
-  Composite.add(engine.world, [downhill, floor, uphill, right, person, ...characters]);
+  Composite.add(engine.world, [base, hill, summit, person, ...characters]);
 
   // run the renderer
   // Render.setPixelRatio(render, 2);
