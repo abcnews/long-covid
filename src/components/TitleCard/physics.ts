@@ -117,7 +117,7 @@ export const createSimuation = (el: HTMLElement) => {
     }
   });
 
-  const characters = CHARACTERS_CONFIGS.map(config => {
+  const characters = CHARACTERS_CONFIGS.map((config, index) => {
     const x = TYPOGRAPHY_OFFSET_X + config.x + config.w / 2;
     const y = TYPOGRAPHY_OFFSET_Y + config.y + config.h / 2;
 
@@ -137,6 +137,7 @@ export const createSimuation = (el: HTMLElement) => {
       y,
       [config.vertexSet],
       {
+        isStatic: index < 11,
         render: {
           sprite: {
             texture: `${__webpack_public_path__}title-card/${config.c}.svg`
