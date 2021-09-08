@@ -41,9 +41,9 @@ const run = async () => {
   const buffer = await readFile(__dirname + `/../design/${IN_FILENAME}`);
   const root = await sketch2json(buffer);
   const page = Object.values(root.pages)[0];
-  const artboard = page.layers[0];
+  const scene = page.layers[0];
 
-  const [ground, person, wordsSS, wordsS, charactersSS, charactersS] = artboard.layers;
+  const [ground, person, wordsSS, wordsS, charactersSS, charactersS] = scene.layers;
   const [q2SS, q1SS, eSS, fSS, iSS, lSS] = charactersSS.layers;
   const [q2S, q1S, eS, fS, iS, lS] = charactersS.layers;
 
@@ -52,6 +52,7 @@ const run = async () => {
   const [q2SD, q1SD, eSD, fSD, iSD, lSD] = await Promise.all(charactersS.layers.map(layer => getSVGPath(layer)));
 
   const shapes = {
+    scene: getProps(scene),
     ground: {
       ...getProps(ground),
       d: groundD

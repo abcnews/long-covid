@@ -11,16 +11,14 @@ interface Box {
   h: number;
 }
 
-const WIDTH = 1440;
-const HEIGHT = 1440;
 const IS_TEXT_SERIF = true;
 const WORDS_DATA = IS_TEXT_SERIF ? DATA.wordsS : DATA.wordsSS;
 const CHARACTERS_DATA = IS_TEXT_SERIF ? DATA.charactersS : DATA.charactersSS;
 const WIDEST_CHARACTER_WIDTH = CHARACTERS_DATA.shapes.reduce((memo, box: Box) => Math.max(memo, box.w), 0);
 const RENDER_OPTIONS = {
   wireframes: false,
-  width: WIDTH,
-  height: HEIGHT,
+  width: DATA.scene.w,
+  height: DATA.scene.h,
   background: '#fff'
 };
 
