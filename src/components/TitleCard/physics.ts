@@ -98,6 +98,10 @@ export const createSimuation = (el: HTMLElement) => {
       }
     )
   );
+  const charactersAngularVelocities = [-1, 0, 1, -1, 1, 0];
+  characters.forEach((body, index) => {
+    Body.setAngularVelocity(body, 0.0025 * charactersAngularVelocities[index]);
+  });
   const engine = Engine.create({
     gravity: {
       scale: 0.001125
