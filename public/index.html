@@ -4,7 +4,8 @@
     <meta charset="utf-8" />
     <meta data-react-helmet="true" name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
     <title>Long COVID</title>
-    <script src="index.js"></script>
+    <link rel="stylesheet" href="https://www.abc.net.au/res/fonts/abcsans/font.css" />
+    <link rel="stylesheet" href="https://www.abc.net.au/res/fonts/abcserif/font.css" />
     <style>
       html {
         overflow-x: hidden;
@@ -15,7 +16,10 @@
         text-size-adjust: none;
         scroll-behavior: auto;
         background-color: #000;
+        color: #fff;
+        font-family: 'ABCSans', sans-serif;
       }
+
       body {
         overflow: hidden;
         margin: 0;
@@ -28,12 +32,19 @@
       main {
         margin: 0 auto;
         width: 100%;
+        box-sizing: border-box;
       }
 
       @media (min-width: 980px) {
         main {
           width: 980px;
         }
+      }
+
+      main > *,
+      main > *::before,
+      main > *::after {
+        box-sizing: inherit;
       }
 
       .Header {
@@ -50,14 +61,74 @@
         }
       }
 
+      main > :not(div) {
+        margin-top: 0;
+        margin-bottom: 24px;
+        margin-left: auto;
+        margin-right: auto;
+        padding-left: 15px;
+        padding-right: 15px;
+        width: 100%;
+        font-family: 'ABCSerif', serif;
+        font-size: 1.125rem;
+        line-height: 1.555555556;
+      }
+
+      @media (min-width: 700px) {
+        main > :not(div) {
+          line-height: 1.666666667;
+        }
+      }
+
+      @media (min-width: 980px) {
+        main > :not(div) {
+          padding-left: 14px;
+          padding-right: 14px;
+          width: 66.6666666667%;
+        }
+      }
+
+      .u-dropcap::first-letter {
+        float: left;
+        padding-top: 6.4px;
+        padding-right: 4px;
+        font-size: 3.46875rem;
+        font-weight: bold;
+        line-height: 0.78;
+      }
+
       footer {
-        height: 100vh;
+        height: 50vh;
       }
     </style>
+    <script src="index.js"></script>
   </head>
   <body>
     <main>
       <div class="Header"></div>
+      <p class="u-dropcap">
+        Sed aliquid quo eaque id ipsum quidem occaecati. Non facilis aliquid assumenda quidem aperiam voluptatem
+        quibusdam. Autem quidem molestias earum eum molestiae quisquam voluptatem ipsum. Et fugit ducimus ratione non
+        saepe qui facere.
+      </p>
+      <p>
+        Natus animi provident doloremque similique. Et molestias molestiae sed ipsam quibusdam inventore suscipit.
+        Beatae cumque dicta voluptatum amet at reprehenderit beatae aperiam. Facere autem omnis quia recusandae
+        accusamus doloremque sunt.
+      </p>
+      <p>
+        Velit optio id quia. Incidunt et rerum doloremque dolorum fuga. Quae repudiandae error unde blanditiis inventore
+        labore incidunt esse.
+      </p>
+      <p>
+        Autem error sit laudantium omnis voluptatem vitae non totam. Consequuntur odio aut vitae a consequatur et quas.
+        Illum animi provident dolor consequatur cumque explicabo est. Vel omnis temporibus veritatis natus quo.
+      </p>
+      <p>
+        Doloremque blanditiis voluptas delectus dolores ut eum. Sequi asperiores consequatur perspiciatis illo
+        excepturi. Illo hic dolor tempora ad id nostrum. Ipsam vitae consequatur quod a tenetur est reiciendis. Impedit
+        voluptatem ut veniam consequatur in asperiores.
+      </p>
     </main>
     <footer></footer>
     <script>
