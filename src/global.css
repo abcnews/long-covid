@@ -1,17 +1,15 @@
-:root {
-  --bg: #000 !important;
-}
-
 [data-component='SiteNavWithOverflow'] {
   display: none;
 }
 
-.Main {
-  background-color: #fff;
-}
-
 .Main .Header h1 {
-  display: none;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
 }
 
 .Main .Header-media {
