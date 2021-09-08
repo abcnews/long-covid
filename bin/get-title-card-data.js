@@ -17,7 +17,7 @@ const getProps = layer => ({
   h: layer.frame.height
 });
 
-const getSVGPath = async layer => {
+const getLayerD = async layer => {
   const data = await readFile(__dirname + `/../public/title-card/${layer.name}.svg`, 'utf-8');
 
   const [, d] = data.match(/ d="(.*?)"/) || [];
@@ -37,6 +37,8 @@ const getSVGPath = async layer => {
   return '';
 };
 
+const getLayersDs = layers => Promise.all(layers.map(layer => getLayerD(layer)));
+
 const run = async () => {
   const buffer = await readFile(__dirname + `/../design/${IN_FILENAME}`);
   const root = await sketch2json(buffer);
@@ -47,9 +49,9 @@ const run = async () => {
   const [q2SS, q1SS, eSS, fSS, iSS, lSS] = charactersSS.layers;
   const [q2S, q1S, eS, fS, iS, lS] = charactersS.layers;
 
-  const groundD = await getSVGPath(ground);
-  const [q2SSD, q1SSD, eSSD, fSSD, iSSD, lSSD] = await Promise.all(charactersSS.layers.map(layer => getSVGPath(layer)));
-  const [q2SD, q1SD, eSD, fSD, iSD, lSD] = await Promise.all(charactersS.layers.map(layer => getSVGPath(layer)));
+  const groundD = await getLayerD(ground);
+  const [q2SSD, q1SSD, eSSD, fSSD, iSSD, lSSD] = await getLayersDs(charactersSS.layers);
+  const [q2SD, q1SD, eSD, fSD, iSD, lSD] = await getLayersDs(charactersS.layers);
 
   const shapes = {
     scene: getProps(scene),
