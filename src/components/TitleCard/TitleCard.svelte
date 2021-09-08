@@ -22,7 +22,7 @@
             hasRun = true;
             const stopSimulation = runSimulation();
 
-            setTimeout(stopSimulation, 6000);
+            setTimeout(stopSimulation, 5000);
           }
         }
       },

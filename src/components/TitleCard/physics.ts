@@ -13,7 +13,10 @@ interface Box {
 
 const WIDTH = 1440;
 const HEIGHT = 1440;
-const WIDEST_CHARACTER_WIDTH = DATA.characters.shapes.reduce((memo, box: Box) => Math.max(memo, box.w), 0);
+const IS_TEXT_SERIF = true;
+const WORDS_DATA = IS_TEXT_SERIF ? DATA.wordsS : DATA.wordsSS;
+const CHARACTERS_DATA = IS_TEXT_SERIF ? DATA.charactersS : DATA.charactersSS;
+const WIDEST_CHARACTER_WIDTH = CHARACTERS_DATA.shapes.reduce((memo, box: Box) => Math.max(memo, box.w), 0);
 const RENDER_OPTIONS = {
   wireframes: false,
   width: WIDTH,
@@ -28,7 +31,7 @@ const extendDataBoxWithVertexSet = (box: Box, sampleLength?: number) => {
   box['vertexSet'] = Svg.pathToVertices(path, sampleLength);
 };
 
-DATA.characters.shapes.forEach(shape => extendDataBoxWithVertexSet(shape, 5));
+CHARACTERS_DATA.shapes.forEach(shape => extendDataBoxWithVertexSet(shape, 5));
 extendDataBoxWithVertexSet(DATA.ground);
 
 const getCXCYWHArgs = (box: Box) => [box.x + box.w / 2, box.y + box.h / 2, box.w, box.h];
@@ -42,7 +45,6 @@ const getStaticRectangleWithSprite = (box: Box) =>
       sprite: getSprite(box)
     }
   });
-
 const correctBodyPosition = (body: Body, intendedPositionX: number, intendedPositionY: number) => {
   const currentPosition = {
     x: (body.bounds.min.x + body.bounds.max.x) / 2,
@@ -55,8 +57,49 @@ const correctBodyPosition = (body: Body, intendedPositionX: number, intendedPosi
 
   Body.setPosition(body, Vector.create(intendedPositionX - positionDiff.x, intendedPositionY - positionDiff.y));
 };
+const getBodyFromVertices = (cX: number, cY: number, vertexSet, options) => {
+  const { render, ...otherOptions } = options || {};
+  const body = Bodies.fromVertices(
+    cX,
+    cY,
+    vertexSet,
+    {
+      ...otherOptions,
+      render: {
+        fillStyle: '#000',
+        strokeStyle: '#000',
+        lineWidth: 1,
+        ...(render || {})
+      }
+    },
+    true
+  );
+
+  correctBodyPosition(body, cX, cY);
+
+  return body;
+};
 
 export const createSimuation = (el: HTMLElement) => {
+  const [groundCX, groundCY] = getCXCYWHArgs(DATA.ground);
+  const ground = getBodyFromVertices(groundCX, groundCY, DATA.ground['vertexSet'], {
+    isStatic: true,
+    render: {
+      lineWidth: 2
+    }
+  });
+  const person = getStaticRectangleWithSprite(DATA.person);
+  const words = getStaticRectangleWithSprite(WORDS_DATA);
+  const characters = CHARACTERS_DATA.shapes.map(shape =>
+    getBodyFromVertices(
+      CHARACTERS_DATA.x + shape.x + shape.w / 2,
+      CHARACTERS_DATA.y + shape.y + shape.h / 2,
+      shape['vertexSet'],
+      {
+        frictionAir: (0.01 / WIDEST_CHARACTER_WIDTH) * shape.w
+      }
+    )
+  );
   const engine = Engine.create({
     gravity: {
       scale: 0.001125
@@ -67,59 +110,11 @@ export const createSimuation = (el: HTMLElement) => {
     engine: engine,
     options: RENDER_OPTIONS
   });
-  const [groundCX, groundCY] = getCXCYWHArgs(DATA.ground);
-  const ground = Bodies.fromVertices(
-    groundCX,
-    groundCY,
-    DATA.ground['vertexSet'],
-    {
-      isStatic: true,
-      render: {
-        fillStyle: '#000',
-        strokeStyle: '#000',
-        lineWidth: 2
-      }
-    },
-    true
-  );
-
-  correctBodyPosition(ground, groundCX, groundCY);
-
-  const person = getStaticRectangleWithSprite(DATA.person);
-  const words = getStaticRectangleWithSprite(DATA.words);
-  const characters = DATA.characters.shapes.map(shape => {
-    const x = DATA.characters.x + shape.x + shape.w / 2;
-    const y = DATA.characters.y + shape.y + shape.h / 2;
-    const character = Bodies.fromVertices(
-      x,
-      y,
-      shape['vertexSet'],
-      {
-        frictionAir: (0.01 / WIDEST_CHARACTER_WIDTH) * shape.w,
-        render: {
-          fillStyle: '#000',
-          lineWidth: 0
-        }
-      },
-      true
-    );
-
-    correctBodyPosition(character, x, y);
-
-    return character;
-  });
-
-  // add all of the bodies to the world
-  // Composite.add(engine.world, [base, hill, summit, person, words, ...characters]);
-  Composite.add(engine.world, [ground, person, words, ...characters]);
-
-  // run the renderer
-  Render.run(render);
-
-  // create runner
   const runner = Runner.create();
 
-  // run the engine
+  Composite.add(engine.world, [ground, person, words, ...characters]);
+  Render.run(render);
+
   return () => {
     Runner.start(runner, engine);
 

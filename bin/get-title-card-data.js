@@ -43,29 +43,43 @@ const run = async () => {
   const page = Object.values(root.pages)[0];
   const artboard = page.layers[0];
 
-  const [ground, person, characters, words] = artboard.layers;
-  const [q2, q1, e, f, i, l] = characters.layers;
+  const [ground, person, wordsSS, wordsS, charactersSS, charactersS] = artboard.layers;
+  const [q2SS, q1SS, eSS, fSS, iSS, lSS] = charactersSS.layers;
+  const [q2S, q1S, eS, fS, iS, lS] = charactersS.layers;
 
   const groundD = await getSVGPath(ground);
-  const [q2D, q1D, eD, fD, iD, lD] = await Promise.all(characters.layers.map(layer => getSVGPath(layer)));
+  const [q2SSD, q1SSD, eSSD, fSSD, iSSD, lSSD] = await Promise.all(charactersSS.layers.map(layer => getSVGPath(layer)));
+  const [q2SD, q1SD, eSD, fSD, iSD, lSD] = await Promise.all(charactersS.layers.map(layer => getSVGPath(layer)));
 
   const shapes = {
-    words: getProps(words),
-    characters: {
-      ...getProps(characters),
-      shapes: [
-        { ...getProps(l), d: lD },
-        { ...getProps(i), d: iD },
-        { ...getProps(f), d: fD },
-        { ...getProps(e), d: eD },
-        { ...getProps(q1), d: q1D },
-        { ...getProps(q2), d: q2D }
-      ]
-    },
-    person: getProps(person),
     ground: {
       ...getProps(ground),
       d: groundD
+    },
+    person: getProps(person),
+    wordsSS: getProps(wordsSS),
+    wordsS: getProps(wordsS),
+    charactersSS: {
+      ...getProps(charactersSS),
+      shapes: [
+        { ...getProps(lSS), d: lSSD },
+        { ...getProps(iSS), d: iSSD },
+        { ...getProps(fSS), d: fSSD },
+        { ...getProps(eSS), d: eSSD },
+        { ...getProps(q1SS), d: q1SSD },
+        { ...getProps(q2SS), d: q2SSD }
+      ]
+    },
+    charactersS: {
+      ...getProps(charactersS),
+      shapes: [
+        { ...getProps(lS), d: lSD },
+        { ...getProps(iS), d: iSD },
+        { ...getProps(fS), d: fSD },
+        { ...getProps(eS), d: eSD },
+        { ...getProps(q1S), d: q1SD },
+        { ...getProps(q2S), d: q2SD }
+      ]
     }
   };
 
