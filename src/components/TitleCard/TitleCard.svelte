@@ -79,15 +79,24 @@
     }
   }
 
+  figure::before,
   figure::after {
     content: '';
     z-index: 1;
     position: absolute;
     bottom: 0;
-    left: calc(100% - 2px);
     width: 1080px;
-    height: 37.5%;
     background-color: #000;
+  }
+
+  figure::before {
+    right: calc(100% - 2px);
+    height: 7.5%;
+  }
+
+  figure::after {
+    left: calc(100% - 2px);
+    height: 48.925%;
   }
 
   figure > :global(canvas) {

@@ -21,7 +21,3 @@
 .Main .Header-media::after {
   content: none;
 }
-
-.Main .Header-content {
-  padding-top: 60px;
-}

@@ -1,7 +1,6 @@
 import 'pathseg';
 const { proxy } = require('@abcnews/dev-proxy');
 import { whenOdysseyLoaded } from '@abcnews/env-utils';
-import { selectMounts } from '@abcnews/mount-utils';
 import TitleCard from './components/TitleCard/TitleCard.svelte';
 import './global.css';
 
