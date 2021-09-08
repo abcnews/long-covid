@@ -15,7 +15,6 @@ const WIDTH = 1440;
 const HEIGHT = 1440;
 const WIDEST_CHARACTER_WIDTH = DATA.characters.shapes.reduce((memo, box: Box) => Math.max(memo, box.w), 0);
 const RENDER_OPTIONS = {
-  pixelRatio: window.devicePixelRatio || 1,
   wireframes: false,
   width: WIDTH,
   height: HEIGHT,
@@ -115,7 +114,6 @@ export const createSimuation = (el: HTMLElement) => {
   Composite.add(engine.world, [ground, person, words, ...characters]);
 
   // run the renderer
-  // Render.setPixelRatio(render, 2);
   Render.run(render);
 
   // create runner
