@@ -18,7 +18,7 @@
         if (type === 'progress') {
           const thresholdProgress = (data as Progress).threshold;
 
-          if (!hasRun && thresholdProgress >= 0.025) {
+          if (!hasRun && thresholdProgress > 0) {
             hasRun = true;
             const stopSimulation = runSimulation();
 
@@ -60,7 +60,6 @@
   figure {
     transform: translate(-50%, 0);
     position: absolute;
-    top: 0;
     left: 50%;
     margin: 0 auto;
     width: 1440px;

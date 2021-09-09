@@ -13,7 +13,9 @@
 }
 
 .Main .Header-media {
+  padding-top: 5vh;
   max-height: none !important;
+  background-color: #fff;
 }
 
 .Main .Header-media::after {
