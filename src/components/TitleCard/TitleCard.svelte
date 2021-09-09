@@ -27,7 +27,7 @@
         }
       },
       {
-        indicatorSelector: '.Header-media > :first-child',
+        indicatorSelector: '.Header-media',
         regionThreshold: 0
       }
     );
