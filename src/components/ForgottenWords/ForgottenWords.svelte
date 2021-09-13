@@ -35,10 +35,39 @@
 </p>
 
 <style>
+  :global([data-forgottenwords]) {
+    margin-left: auto !important;
+    margin-right: auto !important;
+    padding-left: 15px !important;
+    padding-right: 15px !important;
+  }
+
+  @media (min-width: 700px) and (max-width: 979px) {
+    :global([data-forgottenwords]) {
+      width: 83.3333333333%;
+    }
+  }
+
+  @media (min-width: 980px) {
+    :global([data-forgottenwords]) {
+      padding-left: 14px !important;
+      padding-right: 14px !important;
+      width: 66.6666666667%;
+    }
+  }
+
+  :global([data-forgottenwords]) + :global(*) {
+    display: none;
+  }
+
   p {
     font-family: inherit;
     font-size: 1.125rem;
     line-height: 1.555555556;
+  }
+
+  :global(.u-richtext-invert) > :global([data-forgottenwords]) > p {
+    color: #f9f9f9;
   }
 
   @media (min-width: 700px) {

@@ -21,28 +21,3 @@
 .Main .Header-media::after {
   content: none;
 }
-
-.Main > div[data-mount][data-replaces-subsequent-content] {
-  margin-left: auto !important;
-  margin-right: auto !important;
-  padding-left: 15px;
-  padding-right: 15px;
-}
-
-@media (min-width: 700px) and (max-width: 979px) {
-  .Main > div[data-mount][data-replaces-subsequent-content] {
-    width: 83.3333333333%;
-  }
-}
-
-@media (min-width: 980px) {
-  .Main > div[data-mount][data-replaces-subsequent-content] {
-    padding-left: 14px;
-    padding-right: 14px;
-    width: 66.6666666667%;
-  }
-}
-
-.Main > div[data-mount][data-replaces-subsequent-content] + * {
-  display: none;
-}
