@@ -3,8 +3,8 @@
   import type { Progress } from '@abcnews/progress-utils';
   import { onMount } from 'svelte';
   import type { Readable } from 'svelte/store';
-  import { createSimuation } from './physics';
-  import type { RunnerStarter } from './physics';
+  import { createSimuation } from './simulation';
+  import type { RunnerStarter } from './simulation';
 
   let el: HTMLElement;
   let graphicEl: HTMLElement;
@@ -22,7 +22,11 @@
     timeoutId = setTimeout(runSimulation(), 5000);
   }
 
-  onMount(() => (runSimulation = createSimuation(graphicEl)));
+  onMount(() => {
+    runSimulation = createSimuation(graphicEl);
+
+    return () => clearTimeout(timeoutId);
+  });
 </script>
 
 <div bind:this={el}>
