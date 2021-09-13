@@ -78,7 +78,10 @@ const getBodyFromVertices = (cX: number, cY: number, vertexSet, options) => {
   return body;
 };
 
-export const createSimuation = (el: HTMLElement) => {
+export type RunnerStopper = () => void;
+export type RunnerStarter = () => RunnerStopper;
+
+export const createSimuation = (el: HTMLElement): RunnerStarter => {
   const [groundCX, groundCY] = getCXCYWHArgs(DATA.ground);
   const ground = getBodyFromVertices(groundCX, groundCY, DATA.ground['vertexSet'], {
     isStatic: true,

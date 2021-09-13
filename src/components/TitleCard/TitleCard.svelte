@@ -1,37 +1,28 @@
 <script lang="ts">
-  import { subscribe } from '@abcnews/progress-utils';
+  import { getReadableProgressStore } from '@abcnews/progress-utils';
   import type { Progress } from '@abcnews/progress-utils';
   import { onMount } from 'svelte';
+  import type { Readable } from 'svelte/store';
   import { createSimuation } from './physics';
+  import type { RunnerStarter } from './physics';
 
   let el: HTMLElement;
   let graphicEl: HTMLElement;
 
-  onMount(() => {
-    const runSimulation = createSimuation(graphicEl);
+  let timeoutId: NodeJS.Timeout;
+  let runSimulation: RunnerStarter;
 
-    let hasRun = false;
-
-    return subscribe(
-      'titlecard',
-      ({ type, data }) => {
-        if (type === 'progress') {
-          const thresholdProgress = (data as Progress).threshold;
-
-          if (!hasRun && thresholdProgress > 0) {
-            hasRun = true;
-            const stopSimulation = runSimulation();
-
-            setTimeout(stopSimulation, 5000);
-          }
-        }
-      },
-      {
-        indicatorSelector: '.Header-media',
-        regionThreshold: 0
-      }
-    );
+  const progressStore: Readable<Progress> = getReadableProgressStore(`header-media`, {
+    indicatorSelector: '.Header-media',
+    regionThreshold: 0
   });
+
+  $: progress = $progressStore ? $progressStore.threshold : 0;
+  $: if (!timeoutId && runSimulation && progress > 0) {
+    timeoutId = setTimeout(runSimulation(), 5000);
+  }
+
+  onMount(() => (runSimulation = createSimuation(graphicEl)));
 </script>
 
 <div bind:this={el}>

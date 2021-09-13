@@ -72,15 +72,32 @@
         }
       }
 
-      main > :not(div) {
+      main > * {
         margin-top: 0;
         margin-bottom: 24px;
         margin-left: auto;
         margin-right: auto;
+        font-family: 'ABCSerif', serif;
+      }
+
+      @media (min-width: 700px) and (max-width: 979px) {
+        main > * {
+          margin-bottom: 32px;
+        }
+      }
+
+      @media (min-width: 980px) {
+        main > * {
+          margin-bottom: 36px;
+        }
+      }
+
+      main > :not(div) {
+        margin-left: auto !important;
+        margin-right: auto !important;
         padding-left: 15px;
         padding-right: 15px;
         width: 100%;
-        font-family: 'ABCSerif', serif;
         font-size: 1.125rem;
         line-height: 1.555555556;
       }
@@ -88,6 +105,12 @@
       @media (min-width: 700px) {
         main > :not(div) {
           line-height: 1.666666667;
+        }
+      }
+
+      @media (min-width: 700px) and (max-width: 979px) {
+        main > :not(div) {
+          width: 83.3333333333%;
         }
       }
 
@@ -110,6 +133,16 @@
 
       footer {
         height: 50vh;
+      }
+
+      p[ellipsis] {
+        margin-top: 20rem;
+        margin-bottom: 20rem;
+        text-align: center;
+      }
+
+      p[ellipsis]::before {
+        content: '…';
       }
     </style>
     <script src="index.js"></script>
@@ -135,7 +168,25 @@
         When long COVID took her health, Freya had nowhere to turn for answers because the reality was, and remains,
         that we don’t have them.
       </p>
-      <p>…</p>
+      <p ellipsis></p>
+      <div data-mount id="forgottenwords"></div>
+      <p>
+        “Heaps of people say, ‘Oh, I get that and I'm young’, but it just feels different… you'd be mid sentence and
+        then completely forget what you were talking about”
+      </p>
+      <p ellipsis></p>
+      <div data-mount id="scatteredglyphsID1"></div>
+      <p>
+        “Heaps of people say, ‘Oh, I get that and I'm young’, but it just feels different… you'd be mid sentence and
+        then completely forget what you were talking about”
+      </p>
+      <p ellipsis></p>
+      <div data-mount id="scatteredglyphsID2"></div>
+      <p>
+        “Heaps of people say, ‘Oh, I get that and I'm young’, but it just feels different… you'd be mid sentence and
+        then completely forget what you were talking about”
+      </p>
+      <p ellipsis></p>
     </main>
     <footer></footer>
     <script>
