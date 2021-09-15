@@ -1,5 +1,17 @@
+html:not(.is-dark-mode) {
+  background-color: #fff;
+}
+
 html.can-toggle-mode {
   transition: background-color 1s;
+}
+
+.u-richtext > * {
+  color: #000;
+}
+
+.u-richtext-invert > * {
+  color: #fff !important;
 }
 
 html.can-toggle-mode [class*='u-richtext'] > * {
