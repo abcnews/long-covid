@@ -42,6 +42,10 @@
     padding-right: 15px !important;
   }
 
+  :global(.u-richtext-invert) > :global([data-forgottenwords]) {
+    color: #f9f9f9;
+  }
+
   @media (min-width: 700px) and (max-width: 979px) {
     :global([data-forgottenwords]) {
       width: 83.3333333333%;
@@ -64,10 +68,6 @@
     font-family: inherit;
     font-size: 1.125rem;
     line-height: 1.555555556;
-  }
-
-  :global(.u-richtext-invert) > :global([data-forgottenwords]) > p {
-    color: #f9f9f9;
   }
 
   @media (min-width: 700px) {

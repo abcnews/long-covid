@@ -214,5 +214,5 @@ ks.animate("#_a0",[{p:'opacity',t:[0,2500],v:[1,0],e:[[1,0,0,1,1],[0]]}],
 {autoremove:false}).range(0,16000).loop(true);
 if(document.location.search.substr(1).split('&').indexOf('global=paused')>=0)ks.globalPause()})(KeyshapeJS);
 ]]></script>
-<script xlink:href="../keyshape-progress-controller.js"></script>
+    <script xlink:href="../keyshape-progress-controller.js"></script>
 </svg>

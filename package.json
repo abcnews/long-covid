@@ -39,7 +39,7 @@
 		"@abcnews/dev-proxy": "^1.1.0",
 		"@abcnews/env-utils": "^3.0.0",
 		"@abcnews/mount-utils": "^2.0.0",
-		"@abcnews/progress-utils": "^1.1.0",
+		"@abcnews/progress-utils": "^1.2.1",
 		"matter-js": "^0.17.1",
 		"pathseg": "^1.2.1",
 		"poly-decomp": "^0.3.0",

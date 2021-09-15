@@ -1,3 +1,15 @@
+html.can-toggle-mode {
+  transition: background-color 1s;
+}
+
+html.can-toggle-mode [class*='u-richtext'] > * {
+  transition: color 0.5s;
+}
+
+html.can-toggle-mode .u-richtext > * {
+  transition-delay: 0.25s;
+}
+
 [data-component='SiteNavWithOverflow'] {
   display: none;
 }
