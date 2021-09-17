@@ -45,3 +45,44 @@ html.can-toggle-mode .u-richtext > * {
 .Main .Header-media::after {
   content: none;
 }
+
+.Main [data-paragraph-replacement] {
+  margin-left: auto !important;
+  margin-right: auto !important;
+  padding-left: 15px !important;
+  padding-right: 15px !important;
+}
+
+.Main.u-richtext-invert > [data-paragraph-replacement] {
+  color: #f9f9f9;
+}
+
+@media (min-width: 700px) and (max-width: 979px) {
+  .Main > [data-paragraph-replacement] {
+    width: 83.3333333333%;
+  }
+}
+
+@media (min-width: 980px) {
+  .Main > [data-paragraph-replacement] {
+    padding-left: 14px !important;
+    padding-right: 14px !important;
+    width: 66.6666666667%;
+  }
+}
+
+.Main > [data-paragraph-replacement] + p {
+  display: none;
+}
+
+.Main > [data-paragraph-replacement] > p {
+  font-family: inherit;
+  font-size: 1.125rem;
+  line-height: 1.555555556;
+}
+
+@media (min-width: 700px) {
+  .Main > [data-paragraph-replacement] > p {
+    line-height: 1.666666667;
+  }
+}

@@ -1,7 +1,7 @@
 import 'pathseg';
 const { proxy } = require('@abcnews/dev-proxy');
 import { whenOdysseyLoaded } from '@abcnews/env-utils';
-import { selectMounts } from '@abcnews/mount-utils';
+import { getMountValue, selectMounts } from '@abcnews/mount-utils';
 import { getReadableStateStore } from '@abcnews/progress-utils';
 import type { State } from '@abcnews/progress-utils';
 import type { Readable } from 'svelte/store';
@@ -49,8 +49,6 @@ const initModeToggle = () => {
     const shouldBeDarkMode =
       (isInitiallyDarkMode && !shouldBeAlternativeMode) || (!isInitiallyDarkMode && shouldBeAlternativeMode);
 
-    // console.log(state, shouldBeAlternativeMode, shouldBeDarkMode);
-
     document.documentElement.classList[shouldBeDarkMode ? 'add' : 'remove']('is-dark-mode');
     initialRichtextEls.forEach(
       el =>
@@ -78,57 +76,57 @@ const initModeToggle = () => {
 };
 
 /*
-Expected content:
-
-  #forgottenwords
-  “Heaps of people say, ‘Oh, I get that and I'm young’, but it just feels different… you'd be mid sentence and then completely forget what you were talking about”
+#forgottenwords
+“Heaps of people say, ‘Oh, I get that and I'm young’, but it just feels different… you'd be mid sentence and then completely forget what you were talking about”
 */
 const initForgottenWords = () => {
   selectMounts('forgottenwords').forEach((el, index) => {
+    const followingParagraphEl = el.nextElementSibling;
+
+    if (!followingParagraphEl || followingParagraphEl.tagName !== 'P') {
+      return;
+    }
+
+    el.setAttribute('data-paragraph-replacement', '');
     el.setAttribute('data-forgottenwords', String(index));
     new ForgottenWords({
       target: el,
       props: {
-        mountIndex: index
+        mountIndex: index,
+        text: followingParagraphEl.textContent || ''
       }
     });
   });
 };
 
 /*
-Expected content:
-
-  #scatteredglyphs
-  #blocklightdockedpiecemeal
-  #video999999999
-  "I'd have a fever for an hour...
-  "...a sore throat for four hours ...
-  "...then dizziness for two hours...
-  "...then I was OK for an hour".
-  #endblock
-
-The (fake) #video tag forces Odyssey to create a dockable Block-media, which we'll take over
+#scatteredglyphsNAMEfever
+"I'd have a fever for an hour...
+#scatteredglyphsNAMEthroat
+"...a sore throat for four hours ...
+#scatteredglyphsNAMEdizziness
+"...then dizziness for two hours...
+#scatteredglyphsNAMEok
+"...then I was OK for an hour".
 */
 const initScatteredGlyphs = () => {
-  selectMounts('scatteredglyphs').forEach((el, index) => {
-    const blockEl = el.nextElementSibling;
+  selectMounts('scatteredglyphs').forEach(el => {
+    const name = getMountValue(el).split('NAME')[1];
+    const followingParagraphEl = el.nextElementSibling;
 
-    if (blockEl && blockEl.className.indexOf('Block') > -1) {
-      const blockMediaEl = blockEl.querySelector('.Block-media');
-
-      if (!blockMediaEl) {
-        throw new Error('Expected scatteredglyphs block to have media');
-      }
-
-      blockMediaEl.innerHTML = '';
-      el.setAttribute('data-scatteredglyphs', String(index));
-      new ScatteredGlyphs({
-        target: blockMediaEl,
-        props: {
-          mountIndex: index
-        }
-      });
+    if (!followingParagraphEl || followingParagraphEl.tagName !== 'P') {
+      return;
     }
+
+    el.setAttribute('data-paragraph-replacement', '');
+    el.setAttribute('data-scatteredglyphs', name);
+    new ScatteredGlyphs({
+      target: el,
+      props: {
+        name,
+        text: followingParagraphEl.textContent || ''
+      }
+    });
   });
 };
 
