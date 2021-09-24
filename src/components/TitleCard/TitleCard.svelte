@@ -90,7 +90,7 @@
 
   figure::after {
     left: calc(100% - 2px);
-    height: 48.925%;
+    height: 40.4%;
   }
 
   figure > :global(canvas) {
