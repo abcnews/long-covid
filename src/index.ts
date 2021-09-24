@@ -10,6 +10,12 @@ import ScatteredGlyphs from './components/ScatteredGlyphs/ScatteredGlyphs.svelte
 import TitleCard from './components/TitleCard/TitleCard.svelte';
 import './global.css';
 
+const makeParagraphReplacement = (el: HTMLElement) => {
+  el.setAttribute('data-paragraph-replacement', '');
+  el.setAttribute('aria-hidden', 'true');
+  el.setAttribute('role', 'presentation');
+};
+
 const initTitleCard = () => {
   const headerEl = document.querySelector('.Header');
 
@@ -87,7 +93,7 @@ const initForgottenWords = () => {
       return;
     }
 
-    el.setAttribute('data-paragraph-replacement', '');
+    makeParagraphReplacement(el as unknown as HTMLElement);
     el.setAttribute('data-forgottenwords', String(index));
     new ForgottenWords({
       target: el,
@@ -118,13 +124,12 @@ const initScatteredGlyphs = () => {
       return;
     }
 
-    el.setAttribute('data-paragraph-replacement', '');
+    makeParagraphReplacement(el as unknown as HTMLElement);
     el.setAttribute('data-scatteredglyphs', name);
     new ScatteredGlyphs({
       target: el,
       props: {
-        name,
-        text: followingParagraphEl.textContent || ''
+        name
       }
     });
   });
