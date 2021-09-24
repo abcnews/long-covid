@@ -5,6 +5,7 @@ import { getMountValue, selectMounts } from '@abcnews/mount-utils';
 import { getReadableStateStore } from '@abcnews/progress-utils';
 import type { State } from '@abcnews/progress-utils';
 import type { Readable } from 'svelte/store';
+import FallingThrough from './components/FallingThrough/FallingThrough.svelte';
 import ForgottenWords from './components/ForgottenWords/ForgottenWords.svelte';
 import ScatteredGlyphs from './components/ScatteredGlyphs/ScatteredGlyphs.svelte';
 import TitleCard from './components/TitleCard/TitleCard.svelte';
@@ -135,9 +136,35 @@ const initScatteredGlyphs = () => {
   });
 };
 
+/*
+#fallingthroughWORDmind
+"I just feel like I’m losing my mind.".
+*/
+const initFallingThrough = () => {
+  selectMounts('fallingthrough').forEach(el => {
+    const word = getMountValue(el).split('WORD')[1];
+    const followingParagraphEl = el.nextElementSibling;
+
+    if (!followingParagraphEl || followingParagraphEl.tagName !== 'P') {
+      return;
+    }
+
+    makeParagraphReplacement(el as unknown as HTMLElement);
+    el.setAttribute('data-fallingthrough', word);
+    new FallingThrough({
+      target: el,
+      props: {
+        word,
+        text: followingParagraphEl.textContent || ''
+      }
+    });
+  });
+};
+
 Promise.all([proxy('long-covid'), whenOdysseyLoaded]).then(() => {
   initTitleCard();
   initModeToggle();
   initForgottenWords();
   initScatteredGlyphs();
+  initFallingThrough();
 });
