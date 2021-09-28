@@ -76,6 +76,7 @@
     top: 90%;
     width: 20em;
     height: 15em;
+    pointer-events: none;
   }
 
   :global([data-scatteredglyphs='fever']) iframe {
