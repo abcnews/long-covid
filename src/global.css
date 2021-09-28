@@ -2,8 +2,13 @@ html:not(.is-dark-mode) {
   background-color: #fff;
 }
 
-html.can-toggle-mode {
-  transition: background-color 1s;
+html.can-change-mode {
+  transition: background-color 0.5s;
+}
+
+html.is-changing-mode {
+  background-color: var(--bg) !important;
+  transition-duration: 0s;
 }
 
 .u-richtext > * {
@@ -14,12 +19,14 @@ html.can-toggle-mode {
   color: #fff !important;
 }
 
-html.can-toggle-mode [class*='u-richtext'] > * {
-  transition: color 0.5s;
+html.is-changing-mode [class*='u-richtext'] > *,
+.Share-title {
+  color: var(--fg) !important;
 }
 
-html.can-toggle-mode .u-richtext > * {
-  transition-delay: 0.25s;
+html.can-change-mode a,
+html.can-change-mode .Quote p {
+  transition: color 0.5s;
 }
 
 [data-component='SiteNavWithOverflow'] {
