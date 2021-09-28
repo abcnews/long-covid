@@ -42,7 +42,7 @@ const MODE_TOGGLE_MOUNT_PREFIX = 'modetoggle';
 const MODE_TOGGLE_SELECTOR = `[data-mount][id^="${MODE_TOGGLE_MOUNT_PREFIX}"]`;
 const DARK_TO_LIGHT = interpolateLab('#000', '#fff');
 const LIGHT_TO_DARK = interpolateLab('#fff', '#000');
-const MODE_PROGRESS_TO_COLOR_INTERPOLATION_INPUT = scaleLinear([0.4, 0.6], [0, 1]);
+const MODE_PROGRESS_TO_COLOR_INTERPOLATION_INPUT = scaleLinear([0.5, 0.7], [0, 1]);
 
 const initModeChanger = () => {
   const isInitiallyDarkMode = document.documentElement.className.indexOf('is-dark-mode') > -1;
@@ -100,6 +100,7 @@ const initModeChanger = () => {
     },
     {
       indicatorSelector: MODE_TOGGLE_SELECTOR,
+      regionThreshold: 0.4,
       shouldOptimiseIndicatorTracking: false
     }
   );
