@@ -5,7 +5,7 @@ import { getMountValue, selectMounts } from '@abcnews/mount-utils';
 import { subscribe } from '@abcnews/progress-utils';
 import { interpolateLab } from 'd3-interpolate';
 import { scaleLinear } from 'd3-scale';
-import FallingThrough from './components/Mind/Mind.svelte';
+import Mind from './components/Mind/Mind.svelte';
 import ForgottenWords from './components/ForgottenWords/ForgottenWords.svelte';
 import ScatteredGlyphs from './components/ScatteredGlyphs/ScatteredGlyphs.svelte';
 import TitleCard from './components/TitleCard/TitleCard.svelte';
@@ -64,8 +64,6 @@ const initModeChanger = () => {
         return;
       }
 
-      console.log(message);
-
       const state = message.data;
       const shouldBeAlternativeMode = (state === null ? -1 : state._index) % 2 === 0;
 
@@ -123,8 +121,6 @@ const initModeChanger = () => {
         }
 
         const colorInterpolationInput = MODE_PROGRESS_TO_COLOR_INTERPOLATION_INPUT(progress);
-
-        console.log(index, progress, colorInterpolationInput);
 
         if (colorInterpolationInput < 0 || colorInterpolationInput > 1) {
           document.documentElement.classList.remove('is-changing-mode');
@@ -225,7 +221,7 @@ const initMind = () => {
 
     makeParagraphReplacement(el as unknown as HTMLElement);
     el.setAttribute('data-mind', '');
-    new FallingThrough({
+    new Mind({
       target: el,
       props: {
         text: followingParagraphEl.textContent || ''
