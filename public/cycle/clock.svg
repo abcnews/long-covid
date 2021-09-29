@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Keyshape -->
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 450 350" text-rendering="geometricPrecision" shape-rendering="geometricPrecision" style="white-space: pre;">
+    <g id="Clock" opacity="0" transform="translate(160.483,111.211) translate(-90.6717,-90.5008)">
+        <g transform="translate(121.013,166.456) scale(1.7,1.7) translate(-21.6569,-33.7988)">
+            <path id="_a0" fill="#e7e7e7" stroke="none" d="M1.73696,0L3.69072,0L3.69072,42.7003L1.73696,42.7003Z" filter="blur(0px)" opacity="1" transform="translate(41.6144,20.4944) rotate(7) translate(-2.71,-0.04)"/>
+            <path id="_a1" fill="#e5e5e5" stroke="none" d="M0,1.89796L61.4435,1.89796L61.4435,3.98203L0,3.98203Z" filter="blur(0px)" opacity="1" transform="translate(41.2784,21.0354) translate(0.38,-2.93999)"/>
+            <path id="SECONDS" fill="#a4a4a4" stroke="none" d="M0,2.90486L73.5948,2.90486L73.5948,4.02427L0,4.02427Z" filter="blur(0px)" opacity="1" transform="translate(42.0967,20.2171) rotate(37) translate(0.38,-2.93999)"/>
+            <ellipse id="_a2" rx="12.2123" ry="12.2123" fill="#ffffff" stroke="#6f6f6f" filter="blur(0px)" opacity="1" stroke-width="2" transform="translate(41.3013,21.6749) scale(0.5,0.5)"/>
+        </g>
+        <ellipse id="_a3" rx="90.6717" ry="90.5007" fill="none" stroke="#ededed" filter="blur(0px)" stroke-width="8" stroke-dasharray="2" stroke-dashoffset="20" transform="translate(151.212,153.225) translate(0,0) scale(1.8,1.8) translate(0,0)"/>
+    </g>
+    <script xlink:href="../keyshape.js"></script>
+    <script><![CDATA[if(KeyshapeJS.version.indexOf('1.')!=0)throw Error('Expected KeyshapeJS v1.*.*');window.ks=document.ks=KeyshapeJS;(function(ks){
+ks.animate("#Clock",[{p:'opacity',t:[0,600,13300,15000],v:[0,1,1,0],e:[[0],[0],[0],[0]]}],
+"#_a0",[{p:'rotate',t:[0,7600,15000],v:[7,45,66],e:[[0],[0],[0]]},{p:'anchorX',t:[0,15000],v:[-2.71,-2.71],e:[[0],[0]]},{p:'anchorY',t:[0,15000],v:[-0.04,-0.04],e:[[0],[0]]},{p:'opacity',t:[0,15000],v:[1,1],e:[[1,0,0,1,1],[0]]},{p:'d',t:[0,7600,15000],v:["path('M1.73696,0L3.69072,0L3.69072,42.7003L1.73696,42.7003Z')","path('M0.056031,0L5.37165,0L-39.5459,142.098L-47.925,95.2115Z')","path('M1.73696,0L3.69072,0L3.69072,42.7003L1.73696,42.7003Z')"],e:[[1,0,0,1,1],[0],[0]]},{p:'filter',t:[0,7346,15000],v:['blur(0px)','blur(2px)','blur(0px)'],e:[[0],[0],[0]]}],
+"#_a1",[{p:'rotate',t:[0,15000],v:[0,720],e:[[1,0,0,1,1],[0]]},{p:'opacity',t:[0,15000],v:[1,1],e:[[1,0,0,1,1],[0]]},{p:'d',t:[0,7853,15000],v:["path('M0,1.89796L61.4435,1.89796C61.4435,1.89796,61.4435,3.98203,61.4435,3.98203L0,3.98203Z')","path('M0,0L90.8202,15.909C111.334,23.6749,36.3274,20.6223,32.8443,18.2616L0,5.87999Z')","path('M0,1.89796L61.4435,1.89796C61.4435,1.89796,61.4435,3.98203,61.4435,3.98203L0,3.98203Z')"],e:[[0],[1,0,0,1,1],[0]]},{p:'filter',t:[0,7853,15000],v:['blur(0px)','blur(2px)','blur(1px)'],e:[[0],[0],[0]]}],
+"#SECONDS",[{p:'rotate',t:[0,15000],v:[37,1880],e:[[1,0,0,1,1],[0]]},{p:'opacity',t:[0,15000],v:[1,1],e:[[1,0,0,1,1],[0]]},{p:'d',t:[0,15000],v:["path('M0,2.90486L73.5948,2.90486L73.5948,4.02427L0,4.02427Z')","path('M0,2.90486L73.5948,2.90486L73.5948,4.02427L0,4.02427Z')"],e:[[1,0,0,1,1],[0]]},{p:'filter',t:[0,3500,7853,15000],v:['blur(0px)','blur(2px)','blur(2px)','blur(1px)'],e:[[0],[0],[0],[0]]}],
+"#_a2",[{p:'skewX',t:[0,1300,7853,15000],v:[0,20.97,30,0],e:[[0],[0],[0],[0]]},{p:'skewY',t:[0,1300,7853,15000],v:[0,0,0,0],e:[[0],[0],[0],[0]]},{p:'opacity',t:[0,15000],v:[1,1],e:[[1,0,0,1,1],[0]]},{p:'filter',t:[0,1400,7100,15000],v:['blur(0px)','blur(2px)','blur(20px)','blur(0px)'],e:[[0],[0],[0],[0]]}],
+"#_a3",[{p:'mpath',t:[0,15000],v:['0%','100%'],e:[[0],[0]],mp:"M151.212,153.225L154.758,153.023"},{p:'rotate',t:[0,15000],v:[0,180],e:[[1,0,0,1,1],[0]]},{p:'skewX',t:[0,7853,15000],v:[0,38,0],e:[[0],[0],[0]]},{p:'skewY',t:[0,7853,15000],v:[0,-36,0],e:[[0],[0],[0]]},{p:'scaleX',t:[0,15000],v:[1.8,1.8],e:[[0],[0]]},{p:'scaleY',t:[0,15000],v:[1.8,1.8],e:[[0],[0]]},{p:'anchorX',t:[0,7853],v:[0,0],e:[[0],[0]]},{p:'anchorY',t:[0,7853],v:[0,0],e:[[0],[0]]},{p:'stroke',t:[0,15000],v:['#ededed','#ededed'],e:[[0],[0]]},{p:'strokeWidth',t:[0,8106,15000],v:[8,0.5,8],e:[[0],[0],[0]]},{p:'strokeDasharray',t:[0,15000],v:['2','2'],e:[[0],[0]]},{p:'strokeDashoffset',t:[0,15000],v:[20,20],e:[[0],[0]]},{p:'filter',t:[0,7853,15000],v:['blur(0px)','blur(0px)','blur(0px)'],e:[[0],[0],[0]]}],
+{autoremove:false}).range(0,16000).loop(true);
+if(document.location.search.substr(1).split('&').indexOf('global=paused')>=0)ks.globalPause()})(KeyshapeJS);
+]]></script>
+    <script xlink:href="../keyshape-progress-controller.js"></script>
+</svg>

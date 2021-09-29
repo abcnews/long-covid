@@ -1,13 +1,13 @@
 import 'pathseg';
 const { proxy } = require('@abcnews/dev-proxy');
 import { whenOdysseyLoaded } from '@abcnews/env-utils';
-import { getMountValue, selectMounts } from '@abcnews/mount-utils';
+import { selectMounts } from '@abcnews/mount-utils';
 import { subscribe } from '@abcnews/progress-utils';
 import { interpolateLab } from 'd3-interpolate';
 import { scaleLinear } from 'd3-scale';
+import Cycle from './components/Cycle/Cycle.svelte';
 import Mind from './components/Mind/Mind.svelte';
 import ForgottenWords from './components/ForgottenWords/ForgottenWords.svelte';
-import ScatteredGlyphs from './components/ScatteredGlyphs/ScatteredGlyphs.svelte';
 import TitleCard from './components/TitleCard/TitleCard.svelte';
 import './global.css';
 
@@ -155,6 +155,27 @@ const initModeChanger = () => {
 };
 
 /*
+#cycle
+"I'd have a fever for an hour...a sore throat for four hours...then dizziness for two hours...then I was OK for an hour".
+*/
+const initCycle = () => {
+  selectMounts('cycle').forEach(el => {
+    const followingParagraphEl = el.nextElementSibling;
+
+    if (!followingParagraphEl || followingParagraphEl.tagName !== 'P') {
+      return;
+    }
+
+    makeParagraphReplacement(el as unknown as HTMLElement);
+    el.setAttribute('data-cycle', '');
+    new Cycle({
+      target: el,
+      props: {}
+    });
+  });
+};
+
+/*
 #forgottenwords
 “Heaps of people say, ‘Oh, I get that and I'm young’, but it just feels different… you'd be mid sentence and then completely forget what you were talking about”
 */
@@ -173,36 +194,6 @@ const initForgottenWords = () => {
       props: {
         mountIndex: index,
         text: followingParagraphEl.textContent || ''
-      }
-    });
-  });
-};
-
-/*
-#scatteredglyphsNAMEfever
-"I'd have a fever for an hour...
-#scatteredglyphsNAMEthroat
-"...a sore throat for four hours ...
-#scatteredglyphsNAMEdizziness
-"...then dizziness for two hours...
-#scatteredglyphsNAMEok
-"...then I was OK for an hour".
-*/
-const initScatteredGlyphs = () => {
-  selectMounts('scatteredglyphs').forEach(el => {
-    const name = getMountValue(el).split('NAME')[1];
-    const followingParagraphEl = el.nextElementSibling;
-
-    if (!followingParagraphEl || followingParagraphEl.tagName !== 'P') {
-      return;
-    }
-
-    makeParagraphReplacement(el as unknown as HTMLElement);
-    el.setAttribute('data-scatteredglyphs', name);
-    new ScatteredGlyphs({
-      target: el,
-      props: {
-        name
       }
     });
   });
@@ -234,7 +225,7 @@ const initMind = () => {
 Promise.all([proxy('long-covid'), whenOdysseyLoaded]).then(() => {
   initTitleCard();
   initModeChanger();
+  initCycle();
   initForgottenWords();
-  initScatteredGlyphs();
   initMind();
 });
