@@ -233,6 +233,7 @@ const initAnmtr = () => {
     const name = getMountValue(el).split('NAME')[1];
 
     el.setAttribute('data-anmtr', name);
+    el.classList.add('u-full');
     new AnmtrBlock({
       target: el,
       props: {
