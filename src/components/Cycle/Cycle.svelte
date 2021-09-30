@@ -36,6 +36,7 @@
 <script lang="ts">
   import { getReadableProgressStore } from '@abcnews/progress-utils';
   import type { Progress } from '@abcnews/progress-utils';
+  import { spring } from 'svelte/motion';
   import type { Readable } from 'svelte/store';
 
   let clockIframeEl: HTMLIFrameElement;
@@ -47,9 +48,10 @@
     regionThreshold: 0.4,
     indicatorSelector: `[data-cycle]`
   });
+  let feverGraphicOffset = spring({ x: 0, y: 0 });
 
   $: progress = $progressStore ? $progressStore.threshold : 0;
-  $: feverGraphicOffset = progress ? Math.min(progress * 10, 1) : 0;
+  $: feverGraphicOffset.set({ x: Math.min(progress * 250, 25), y: Math.min(progress * 500, 50) });
   $: feverGraphicProgress = progress ? Math.min(0.5 + progress * 12, 1) : 0.5;
   $: isFeverIframeReady &&
     feverIframeEl.contentWindow &&
@@ -75,7 +77,7 @@
   </span>
   <iframe
     bind:this={feverIframeEl}
-    style={`transform:translate(${feverGraphicOffset * 25}vw,${feverGraphicOffset * 60}vh)`}
+    style={`transform:translate(${$feverGraphicOffset.x}vw,${$feverGraphicOffset.y}vh)`}
     title="Fever Graphic"
     frameBorder="0"
     scrolling="no"
@@ -135,5 +137,6 @@
     left: -3.25em;
     width: 20em;
     height: 15em;
+    transition: transform 0.25s linear;
   }
 </style>
