@@ -53,7 +53,6 @@
 
   $: progress = $progressStore ? $progressStore.threshold : 0;
   $: clockGraphicProgress = progress ? ((progress * 25) % 10) / 10 : 0;
-  $: console.log(clockGraphicProgress);
   $: isClockIframeReady &&
     clockIframeEl.contentWindow &&
     clockIframeEl.contentWindow.postMessage({ type: 'progress', payload: clockGraphicProgress }, '*');
