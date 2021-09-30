@@ -5,9 +5,10 @@
   const TEXT_AND_PERSON_GRAPHIC_PATH = `${BASE_PATH}text_and_person.svg?global=paused`;
 
   const interpolateFixedGraphicsOpacity = (progress: number) => {
-    progress < 0.1 ? progress * 10 : progress >= 0.1 && progress <= 0.9 ? 1 : progress > 0.9 ? (1 - progress) * 10 : 0;
-    if (progress < 0.1) {
-      return progress * 10;
+    if (progress < 0.025) {
+      return 0;
+    } else if (progress < 0.125) {
+      return (progress - 0.025) * 10;
     } else if (progress <= 0.9) {
       return 1;
     } else {
@@ -30,36 +31,6 @@
       return 1;
     }
   };
-
-  // const interpolateTextAndPersonGraphicProgress = (progress: number) => {
-  //   if (progress < 0.15) {
-  //     return (0.3333 / 0.15) * progress;
-  //   } else if (progress < 0.3) {
-  //     return 0.3333;
-  //   } else if (progress < 0.45) {
-  //     return 0.3333 + (0.3333 / 0.15) * (progress - 0.3);
-  //   } else if (progress < 0.6) {
-  //     return 0.6667;
-  //   } else if (progress < 0.75) {
-  //     return 0.6667 + (0.3333 / 0.15) * (progress - 0.6);
-  //   } else {
-  //     return 1;
-  //   }
-  // };
-
-  // const interpolateTextAndPersonGraphicProgress = (progress: number) => {
-  //   if (progress < 0.2) {
-  //     return (0.3333 / 0.2) * progress;
-  //   } else if (progress < 0.4) {
-  //     return 0.3333;
-  //   } else if (progress < 0.6) {
-  //     return 0.3333 + (0.3333 / 0.2) * (progress - 0.4);
-  //   } else if (progress < 0.8) {
-  //     return 0.6667;
-  //   } else {
-  //     return 0.6667 + (0.3333 / 0.2) * (progress - 0.8);
-  //   }
-  // };
 </script>
 
 <script lang="ts">
@@ -73,12 +44,12 @@
   let isFeverIframeReady: boolean = false;
   let isTextAndPersonIframeReady: boolean = false;
   let progressStore: Readable<Progress> = getReadableProgressStore('cycle', {
-    regionThreshold: 0.5,
+    regionThreshold: 0.4,
     indicatorSelector: `[data-cycle]`
   });
 
   $: progress = $progressStore ? $progressStore.threshold : 0;
-  // $: feverGraphicOffset = progress ? Math.min(8, progress * 120) : 0;
+  $: feverGraphicOffset = progress ? Math.min(progress * 10, 1) : 0;
   $: feverGraphicProgress = progress ? Math.min(0.5 + progress * 12, 1) : 0.5;
   $: isFeverIframeReady &&
     feverIframeEl.contentWindow &&
@@ -104,21 +75,13 @@
   </span>
   <iframe
     bind:this={feverIframeEl}
+    style={`transform:translate(${feverGraphicOffset * 25}vw,${feverGraphicOffset * 60}vh)`}
     title="Fever Graphic"
     frameBorder="0"
     scrolling="no"
     src={FEVER_GRAPHIC_PATH}
     on:load={() => (isFeverIframeReady = true)}
   />
-  <!-- <iframe
-    bind:this={feverIframeEl}
-    style={`transform:translate(${feverGraphicOffset / 2}em,${feverGraphicOffset * 2}em)`}
-    title="Fever Graphic"
-    frameBorder="0"
-    scrolling="no"
-    src={FEVER_GRAPHIC_PATH}
-    on:load={() => (isFeverIframeReady = true)}
-  /> -->
 </p>
 
 <!-- svelte-ignore css-unused-selector -->
@@ -167,7 +130,6 @@
 
   p > iframe {
     will-change: transform;
-    opacity: 1;
     transform: none;
     top: -6.25em;
     left: -3.25em;
