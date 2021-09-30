@@ -153,17 +153,15 @@
     top: 0;
     left: 0;
     width: 450px;
-    /* width: 28.125rem; */
     max-width: none;
-    height: 350px;
-    /* height: 21.875em; */
+    height: 450px;
     pointer-events: none;
   }
 
   @media (min-width: 700px) {
     iframe {
       width: 540px;
-      height: 420px;
+      height: 540px;
     }
   }
 
