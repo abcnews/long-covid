@@ -1,6 +1,6 @@
 <script lang="ts" context="module">
   const BASE_PATH = `${__webpack_public_path__}cycle/`;
-  const CLOCK_GRAPHIC_PATH = `${BASE_PATH}clock.svg`;
+  const CLOCK_GRAPHIC_PATH = `${BASE_PATH}clock.svg?global=paused`;
   const FEVER_GRAPHIC_PATH = `${BASE_PATH}fever.svg?global=paused`;
   const TEXT_AND_PERSON_GRAPHIC_PATH = `${BASE_PATH}text_and_person.svg?global=paused`;
 
@@ -42,6 +42,7 @@
   let clockIframeEl: HTMLIFrameElement;
   let feverIframeEl: HTMLIFrameElement;
   let textAndPersonIframeEl: HTMLIFrameElement;
+  let isClockIframeReady: boolean = false;
   let isFeverIframeReady: boolean = false;
   let isTextAndPersonIframeReady: boolean = false;
   let progressStore: Readable<Progress> = getReadableProgressStore('cycle', {
@@ -51,6 +52,11 @@
   let feverGraphicOffset = spring({ x: 0, y: 0 });
 
   $: progress = $progressStore ? $progressStore.threshold : 0;
+  $: clockGraphicProgress = progress ? ((progress * 25) % 10) / 10 : 0;
+  $: console.log(clockGraphicProgress);
+  $: isClockIframeReady &&
+    clockIframeEl.contentWindow &&
+    clockIframeEl.contentWindow.postMessage({ type: 'progress', payload: clockGraphicProgress }, '*');
   $: feverGraphicOffset.set({ x: Math.min(progress * 250, 25), y: Math.min(progress * 500, 50) });
   $: feverGraphicProgress = progress ? Math.min(0.5 + progress * 12, 1) : 0.5;
   $: isFeverIframeReady &&
@@ -65,7 +71,14 @@
 
 <p class:clips={progress % 1 === 0}>
   <span style={`opacity:${fixedGraphicsOpacity}`}>
-    <iframe bind:this={clockIframeEl} title="Clock Graphic" frameBorder="0" scrolling="no" src={CLOCK_GRAPHIC_PATH} />
+    <iframe
+      bind:this={clockIframeEl}
+      title="Clock Graphic"
+      frameBorder="0"
+      scrolling="no"
+      src={CLOCK_GRAPHIC_PATH}
+      on:load={() => (isClockIframeReady = true)}
+    />
     <iframe
       bind:this={textAndPersonIframeEl}
       title="Text And Person Graphic"
