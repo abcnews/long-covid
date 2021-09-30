@@ -1,54 +1,58 @@
 {
-	"name": "long-covid",
-	"version": "1.0.25",
-	"description": "A project generated from aunty's svelte project template.",
-	"license": "MIT",
-	"private": true,
-	"contributors": [
-		"Colin Gourlay <gourlay.colin@abc.net.au>"
-	],
-	"aunty": {
-		"type": "svelte",
-		"build": {
-			"entry": [
-				"index",
-				"keyshape-progress-controller"
-			]
-		}
-	},
-	"scripts": {
-		"start": "aunty serve",
-		"test": "aunty test"
-	},
-	"abc": {
-		"css": {
-			"libraryDir": "./node_modules/@abcaustralia/nucleus/css",
-			"logVariables": "false"
-		}
-	},
-	"devDependencies": {
-		"@abcnews/aunty": "^12.0.3",
-		"@testing-library/svelte": "^3.0.3",
-		"@types/d3-color": "^3.0.2",
-		"@types/d3-interpolate": "^3.0.1",
-		"@types/d3-scale": "^4.0.1",
-		"@types/jest": "^27.0.1",
-		"@types/webpack-env": "^1.16.2",
-		"jsonfile": "^6.1.0",
-		"sketch2json": "^0.1.2"
-	},
-	"dependencies": {
-		"@abcnews/alternating-case-to-object": "^3.0.2",
-		"@abcnews/dev-proxy": "^1.1.0",
-		"@abcnews/env-utils": "^3.0.0",
-		"@abcnews/mount-utils": "^2.0.0",
-		"@abcnews/progress-utils": "^1.2.3",
-		"d3-color": "^3.0.1",
-		"d3-interpolate": "^3.0.1",
-		"d3-scale": "^4.0.2",
-		"matter-js": "^0.17.1",
-		"pathseg": "^1.2.1",
-		"poly-decomp": "^0.3.0",
-		"svelte": "^3.43.0"
-	}
+  "name": "long-covid",
+  "version": "1.0.25",
+  "description": "A project generated from aunty's svelte project template.",
+  "license": "MIT",
+  "private": true,
+  "contributors": [
+    "Colin Gourlay <gourlay.colin@abc.net.au>"
+  ],
+  "aunty": {
+    "type": "svelte",
+    "build": {
+      "entry": [
+        "index",
+        "keyshape-progress-controller"
+      ],
+      "includedDependencies": [
+        "@abcnews/anmtr"
+      ]
+    }
+  },
+  "scripts": {
+    "start": "aunty serve",
+    "test": "aunty test"
+  },
+  "abc": {
+    "css": {
+      "libraryDir": "./node_modules/@abcaustralia/nucleus/css",
+      "logVariables": "false"
+    }
+  },
+  "devDependencies": {
+    "@abcnews/aunty": "^12.0.3",
+    "@testing-library/svelte": "^3.0.3",
+    "@types/d3-color": "^3.0.2",
+    "@types/d3-interpolate": "^3.0.1",
+    "@types/d3-scale": "^4.0.1",
+    "@types/jest": "^27.0.1",
+    "@types/webpack-env": "^1.16.2",
+    "jsonfile": "^6.1.0",
+    "sketch2json": "^0.1.2"
+  },
+  "dependencies": {
+    "@abcnews/alternating-case-to-object": "^3.0.2",
+    "@abcnews/anmtr": "^0.0.2",
+    "@abcnews/dev-proxy": "^1.1.0",
+    "@abcnews/env-utils": "^3.0.0",
+    "@abcnews/mount-utils": "^2.0.0",
+    "@abcnews/progress-utils": "^1.3.0",
+    "d3-color": "^3.0.1",
+    "d3-interpolate": "^3.0.1",
+    "d3-scale": "^4.0.2",
+    "matter-js": "^0.17.1",
+    "pathseg": "^1.2.1",
+    "poly-decomp": "^0.3.0",
+    "svelte": "^3.43.0"
+  }
 }

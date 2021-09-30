@@ -1,10 +1,11 @@
 import 'pathseg';
 const { proxy } = require('@abcnews/dev-proxy');
 import { whenOdysseyLoaded } from '@abcnews/env-utils';
-import { selectMounts } from '@abcnews/mount-utils';
+import { getMountValue, selectMounts } from '@abcnews/mount-utils';
 import { subscribe } from '@abcnews/progress-utils';
 import { interpolateLab } from 'd3-interpolate';
 import { scaleLinear } from 'd3-scale';
+import AnmtrBlock from './components/Anmtr/AnmtrBlock.svelte';
 import Cycle from './components/Cycle/Cycle.svelte';
 import Mind from './components/Mind/Mind.svelte';
 import ForgottenWords from './components/ForgottenWords/ForgottenWords.svelte';
@@ -222,10 +223,30 @@ const initMind = () => {
   });
 };
 
+/*
+#anmtrNAMEjudy
+---
+#anmtrNAMEfreya
+*/
+const initAnmtr = () => {
+  selectMounts('anmtr').forEach(el => {
+    const name = getMountValue(el).split('NAME')[1];
+
+    el.setAttribute('data-anmtr', name);
+    new AnmtrBlock({
+      target: el,
+      props: {
+        name
+      }
+    });
+  });
+};
+
 Promise.all([proxy('long-covid'), whenOdysseyLoaded]).then(() => {
   initTitleCard();
   initModeChanger();
   initCycle();
   initForgottenWords();
   initMind();
+  initAnmtr();
 });
