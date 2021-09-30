@@ -33,6 +33,19 @@ html.can-change-mode .Quote p {
   display: none;
 }
 
+.Main a,
+.Main .Quote p {
+  color: inherit !important;
+}
+
+.Main a {
+  text-decoration: underline !important;
+}
+
+.Main .Quote.is-pullquote p {
+  font-weight: 700 !important;
+}
+
 .Main .Header h1 {
   clip: rect(0 0 0 0);
   clip-path: inset(50%);
@@ -41,6 +54,10 @@ html.can-change-mode .Quote p {
   position: absolute;
   white-space: nowrap;
   width: 1px;
+}
+
+.Main .Header a {
+  text-decoration: none !important;
 }
 
 .Main .Header-media {
