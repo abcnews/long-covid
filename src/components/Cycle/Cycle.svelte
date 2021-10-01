@@ -9,10 +9,10 @@
       return 0;
     } else if (progress < 0.125) {
       return (progress - 0.025) * 10;
-    } else if (progress <= 0.9) {
+    } else if (progress <= 0.85) {
       return 1;
     } else {
-      return (1 - progress) * 10;
+      return (0.95 - progress) * 10;
     }
   };
 
@@ -49,14 +49,14 @@
     regionThreshold: 0.4,
     indicatorSelector: `[data-cycle]`
   });
-  let feverGraphicOffset = spring({ x: 0, y: 0 });
+  let feverGraphicYOffset = spring(0);
 
   $: progress = $progressStore ? $progressStore.threshold : 0;
   $: clockGraphicProgress = progress ? ((progress * 25) % 10) / 10 : 0;
   $: isClockIframeReady &&
     clockIframeEl.contentWindow &&
     clockIframeEl.contentWindow.postMessage({ type: 'progress', payload: clockGraphicProgress }, '*');
-  $: feverGraphicOffset.set({ x: Math.min(progress * 250, 25), y: Math.min(progress * 500, 50) });
+  $: feverGraphicYOffset.set(Math.min(progress * 2500, 80));
   $: feverGraphicProgress = progress ? Math.min(0.5 + progress * 12, 1) : 0.5;
   $: isFeverIframeReady &&
     feverIframeEl.contentWindow &&
@@ -89,7 +89,7 @@
   </span>
   <iframe
     bind:this={feverIframeEl}
-    style={`transform:translate(${$feverGraphicOffset.x}vw,${$feverGraphicOffset.y}vh)`}
+    style={`transform:translate(0,${$feverGraphicYOffset}%)`}
     title="Fever Graphic"
     frameBorder="0"
     scrolling="no"
@@ -146,8 +146,8 @@
     will-change: transform;
     transform: none;
     top: -6.25em;
-    left: -3.25em;
-    width: 20em;
+    left: 0;
+    width: 100%;
     height: 15em;
     transition: transform 0.25s linear;
   }
