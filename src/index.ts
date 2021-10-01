@@ -39,6 +39,23 @@ const initTitleCard = () => {
   }
 };
 
+const initCenteredParagraphs = () => {
+  Array.from(document.querySelectorAll('p strong:first-child:last-child')).forEach(el => {
+    const paragraphEl = el.parentElement;
+
+    if (!paragraphEl) {
+      return;
+    }
+
+    const paragraphElText = (paragraphEl.textContent || '').trim();
+    const elText = (el.textContent || '').trim();
+
+    if (paragraphElText === elText) {
+      paragraphEl.setAttribute('data-centered', '');
+    }
+  });
+};
+
 const MODE_TOGGLE_MOUNT_PREFIX = 'modetoggle';
 const MODE_TOGGLE_SELECTOR = `[data-mount][id^="${MODE_TOGGLE_MOUNT_PREFIX}"]`;
 const DARK_TO_LIGHT = interpolateLab('#000', '#fff');
@@ -245,6 +262,7 @@ const initAnmtr = () => {
 
 Promise.all([proxy('long-covid'), whenOdysseyLoaded]).then(() => {
   initTitleCard();
+  initCenteredParagraphs();
   initModeChanger();
   initCycle();
   initForgottenWords();

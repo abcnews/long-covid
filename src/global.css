@@ -70,6 +70,10 @@ html.can-change-mode .Quote p {
   content: none;
 }
 
+.Main [data-centered] {
+  text-align: center;
+}
+
 .Main [data-paragraph-replacement] {
   margin-left: auto !important;
   margin-right: auto !important;
