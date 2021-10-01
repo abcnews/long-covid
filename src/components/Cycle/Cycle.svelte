@@ -56,8 +56,8 @@
   $: isClockIframeReady &&
     clockIframeEl.contentWindow &&
     clockIframeEl.contentWindow.postMessage({ type: 'progress', payload: clockGraphicProgress }, '*');
-  $: feverGraphicYOffset.set(Math.min(progress * 2500, 80));
-  $: feverGraphicProgress = progress ? Math.min(0.5 + progress * 12, 1) : 0.5;
+  $: feverGraphicYOffset.set(Math.min(progress * 1500, 70));
+  $: feverGraphicProgress = progress ? Math.min(progress * 12, 1) : 0;
   $: isFeverIframeReady &&
     feverIframeEl.contentWindow &&
     feverIframeEl.contentWindow.postMessage({ type: 'progress', payload: feverGraphicProgress }, '*');
@@ -89,7 +89,7 @@
   </span>
   <iframe
     bind:this={feverIframeEl}
-    style={`transform:translate(0,${$feverGraphicYOffset}%)`}
+    style={`transform:translate(-50%,${-50 + $feverGraphicYOffset}%)`}
     title="Fever Graphic"
     frameBorder="0"
     scrolling="no"
@@ -144,11 +144,10 @@
 
   p > iframe {
     will-change: transform;
-    transform: none;
-    top: -6.25em;
-    left: 0;
-    width: 100%;
-    height: 15em;
+    left: 50%;
+    top: 0.75em;
+    width: 28.5em;
+    height: 28.5em;
     transition: transform 0.25s linear;
   }
 </style>
