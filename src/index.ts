@@ -123,6 +123,21 @@ const initModeChanger = () => {
     }
   );
 
+  const abortModeTransition = () => {
+    document.documentElement.classList.remove('is-changing-mode');
+    document.documentElement.style.removeProperty('--bg');
+    document.documentElement.style.removeProperty('--fg');
+  };
+
+  let lastModeTransitionUpdateTime: number | null = null;
+
+  setInterval(() => {
+    if (lastModeTransitionUpdateTime !== null && Date.now() - lastModeTransitionUpdateTime > 1000) {
+      lastModeTransitionUpdateTime = null;
+      abortModeTransition();
+    }
+  }, 1000);
+
   selectMounts(MODE_TOGGLE_MOUNT_PREFIX, { markAsUsed: false }).forEach((el, index) => {
     el.setAttribute('data-index', String(index));
 
@@ -139,12 +154,12 @@ const initModeChanger = () => {
           return;
         }
 
+        lastModeTransitionUpdateTime = Date.now();
+
         const colorInterpolationInput = MODE_PROGRESS_TO_COLOR_INTERPOLATION_INPUT(progress);
 
         if (colorInterpolationInput < 0 || colorInterpolationInput > 1) {
-          document.documentElement.classList.remove('is-changing-mode');
-          document.documentElement.style.removeProperty('--bg');
-          document.documentElement.style.removeProperty('--fg');
+          abortModeTransition();
           return;
         }
 
