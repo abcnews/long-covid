@@ -6,12 +6,11 @@
 
   export let progressStore: Readable<Progress>;
   export let layers: Layer[] = [];
-  export let timelineFactor: number = 1;
 
   let stageHeight: number;
   let stageWidth: number;
 
-  $: progress = $progressStore ? Math.min($progressStore.envelope / timelineFactor, 1) : 0;
+  $: progress = $progressStore ? $progressStore.envelope : 0;
 </script>
 
 <div
@@ -21,7 +20,7 @@
   bind:clientHeight={stageHeight}
   bind:clientWidth={stageWidth}
 >
-  {#each layers as layer (layer.id)}
+  {#each [...layers].reverse() as layer (layer.id)}
     <AnmtrLayer {stageHeight} {stageWidth} {layer} {progress} />
   {/each}
 </div>
