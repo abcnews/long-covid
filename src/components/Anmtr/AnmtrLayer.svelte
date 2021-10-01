@@ -41,4 +41,8 @@
     height: 100px;
     border: 1px solid rosybrown;
   }
+
+  img {
+    max-width: none !important;
+  }
 </style>
