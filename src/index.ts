@@ -18,7 +18,7 @@ const makeParagraphReplacement = (el: HTMLElement) => {
   el.setAttribute('role', 'presentation');
 };
 
-const initTitleCard = () => {
+const initTitleCard = (prefersReducedMotion: boolean = false) => {
   const headerEl = document.querySelector('.Header');
 
   if (headerEl) {
@@ -34,7 +34,9 @@ const initTitleCard = () => {
 
     new TitleCard({
       target: headerMediaEl,
-      props: {}
+      props: {
+        shouldRunSimulation: !prefersReducedMotion
+      }
     });
   }
 };
@@ -62,7 +64,7 @@ const DARK_TO_LIGHT = interpolateLab('#000', '#fff');
 const LIGHT_TO_DARK = interpolateLab('#fff', '#000');
 const MODE_PROGRESS_TO_COLOR_INTERPOLATION_INPUT = scaleLinear([0.5, 0.7], [0, 1]);
 
-const initModeChanger = () => {
+const initModeChanger = (prefersReducedMotion: boolean = false) => {
   const isInitiallyDarkMode = document.documentElement.className.indexOf('is-dark-mode') > -1;
   const initialRichtextEls = Array.from(document.querySelectorAll('.u-richtext'));
   const initialRichtextInvertEls = Array.from(document.querySelectorAll('.u-richtext-invert'));
@@ -73,7 +75,9 @@ const initModeChanger = () => {
 
   let shouldBeDarkMode = isInitiallyDarkMode;
 
-  requestAnimationFrame(() => document.documentElement.classList.add('can-change-mode'));
+  if (!prefersReducedMotion) {
+    requestAnimationFrame(() => document.documentElement.classList.add('can-change-mode'));
+  }
 
   subscribe(
     'modetoggles',
@@ -122,6 +126,10 @@ const initModeChanger = () => {
       shouldOptimiseIndicatorTracking: false
     }
   );
+
+  if (prefersReducedMotion) {
+    return;
+  }
 
   const abortModeTransition = () => {
     document.documentElement.classList.remove('is-changing-mode');
@@ -276,11 +284,16 @@ const initAnmtr = () => {
 };
 
 Promise.all([proxy('long-covid'), whenOdysseyLoaded]).then(() => {
-  initTitleCard();
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  initTitleCard(prefersReducedMotion);
   initCenteredParagraphs();
-  initModeChanger();
-  initCycle();
-  initForgottenWords();
-  initMind();
-  initAnmtr();
+  initModeChanger(prefersReducedMotion);
+
+  if (!prefersReducedMotion) {
+    initCycle();
+    initForgottenWords();
+    initMind();
+    initAnmtr();
+  }
 });

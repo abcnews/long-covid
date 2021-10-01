@@ -6,6 +6,8 @@
   import { createSimuation } from './simulation';
   import type { RunnerStarter } from './simulation';
 
+  export let shouldRunSimulation: boolean = true;
+
   let el: HTMLElement;
   let graphicEl: HTMLElement;
 
@@ -18,7 +20,7 @@
   });
 
   $: progress = $progressStore ? $progressStore.threshold : 0;
-  $: if (!timeoutId && runSimulation && progress > 0) {
+  $: if (shouldRunSimulation && !timeoutId && runSimulation && progress > 0) {
     timeoutId = setTimeout(runSimulation(), 5000);
   }
 

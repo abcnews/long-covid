@@ -11,12 +11,24 @@ html.is-changing-mode {
   transition-duration: 0s;
 }
 
+@media (prefers-reduced-motion: reduce) {
+  html {
+    transition: background-color 2s;
+  }
+}
+
 .u-richtext > * {
   color: #000;
 }
 
 .u-richtext-invert > * {
   color: #fff !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [class*='u-richtext'] > * {
+    transition: color 1.5s 0.25s;
+  }
 }
 
 html.is-changing-mode [class*='u-richtext'] > *,
@@ -27,6 +39,13 @@ html.is-changing-mode [class*='u-richtext'] > *,
 html.can-change-mode a,
 html.can-change-mode .Quote p {
   transition: color 0.5s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html.can-change-mode a,
+  html.can-change-mode .Quote p {
+    transition: color 1.5s 0.25s;
+  }
 }
 
 [data-component='SiteNavWithOverflow'] {
