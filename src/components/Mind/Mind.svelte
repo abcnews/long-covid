@@ -48,7 +48,7 @@
       on:load={() => (isIFrameReady = true)}
     /><ins>mind</ins></span
   >
-  {textAfter}
+  <span style={`opacity:${progress > 0 ? 0 : 1}`}>{textAfter}</span>
 </p>
 
 <style>
@@ -77,5 +77,9 @@
 
   ins {
     opacity: 0;
+  }
+
+  span + span {
+    transition: opacity 0.25s;
   }
 </style>
