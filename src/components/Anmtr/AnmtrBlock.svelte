@@ -3,6 +3,8 @@
 
   const BASE_PATH = `${__webpack_public_path__}anmtr/`;
   const STAGE_SCROLL_DISTANCES = {
+    adam: 2000,
+    bronwyn: 2000,
     freya: 4500,
     judy: 2000
   };

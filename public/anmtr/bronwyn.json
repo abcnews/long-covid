@@ -1,0 +1,54 @@
+[
+  {
+    "name": "B young",
+    "id": "x4GS9RYxbjzCCH2g19zNF",
+    "tweens": [
+      {
+        "property": "b",
+        "keyframes": [
+          { "id": "SPn-gzo1AJTRMe5ytx1T4", "time": 0, "value": 0 },
+          { "id": "eODi0o9DSx6JtHua6MwcT", "time": 1, "value": 20 }
+        ]
+      },
+      {
+        "property": "o",
+        "keyframes": [
+          { "id": "IAvfOHEkMYdtBKVSe9wDC", "time": 0, "value": 1 },
+          { "id": "VY9FJso276QNFl-RQWyIQ", "time": 1, "value": 0 }
+        ]
+      }
+    ],
+    "constrainWidth": true,
+    "constrainHeight": false,
+    "widthConstraint": { "min": 0, "max": 625, "target": 100 },
+    "heightConstraint": { "min": 0, "max": 100, "target": 100 },
+    "objectFit": "fill",
+    "src": "https://preview-production.wcms.abc-cdn.net.au/2ca264c81950b37fb18b4ca56b90f298?src"
+  },
+  {
+    "name": "wheelchair",
+    "id": "ePQ4brt6SF1O5CRSDNJGA",
+    "tweens": [
+      {
+        "property": "o",
+        "keyframes": [
+          { "id": "RMNBXCy1DXENfiJkLp6Gl", "time": 0, "value": 0 },
+          { "id": "BOdG0l_T_CykAQzUrBXDy", "time": 1, "value": 1 }
+        ]
+      },
+      {
+        "property": "b",
+        "keyframes": [
+          { "id": "n1rE-ylMZxVgEM7PJGdEO", "time": 0, "value": 15 },
+          { "id": "zLKVt7nv71ruxKVK7Mox2", "time": 1, "value": 0 }
+        ]
+      }
+    ],
+    "constrainWidth": true,
+    "constrainHeight": false,
+    "widthConstraint": { "min": 0, "max": 625, "target": 100 },
+    "heightConstraint": { "min": 0, "max": 100, "target": 100 },
+    "objectFit": "fill",
+    "src": "https://preview-production.wcms.abc-cdn.net.au/b333c6e09f2f3f206cf164b49d3c4744?src"
+  }
+]
