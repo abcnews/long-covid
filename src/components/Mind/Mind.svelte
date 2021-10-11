@@ -1,35 +1,24 @@
 <script lang="ts" context="module">
   const GRAPHIC_PATH = `${__webpack_public_path__}mind/graphic.svg`;
-
-  const interpolateGraphicYOffset = (progress: number) => {
-    if (progress < 0.2) {
-      return 0;
-    } else {
-      return (progress - 0.2) * 1.25;
-    }
-  };
 </script>
 
 <script lang="ts">
   import { getReadableProgressStore } from '@abcnews/progress-utils';
   import type { Progress } from '@abcnews/progress-utils';
-  import { spring } from 'svelte/motion';
   import type { Readable } from 'svelte/store';
 
   export let text: string;
 
   let [textBefore, textAfter] = text.split('mind');
-  let graphicYOffset = spring(0);
 
   let iframeEl: HTMLIFrameElement;
   let isIFrameReady: boolean = false;
   let progressStore: Readable<Progress> = getReadableProgressStore('mind', {
-    regionThreshold: 0.4,
+    regionThreshold: 0.5,
     indicatorSelector: `[data-mind]`
   });
 
   $: progress = $progressStore ? $progressStore.threshold : 0;
-  $: graphicYOffset.set(interpolateGraphicYOffset(progress));
   $: isIFrameReady &&
     iframeEl.contentWindow &&
     iframeEl.contentWindow.postMessage({ type: 'progress', payload: progress }, '*');
@@ -41,7 +30,6 @@
     <iframe
       bind:this={iframeEl}
       title="Graphic"
-      style={`transform:translate(0,${$graphicYOffset * 35}em)`}
       frameBorder="0"
       scrolling="no"
       src={`${GRAPHIC_PATH}?global=paused`}
@@ -53,7 +41,7 @@
 
 <style>
   p {
-    padding-bottom: 75em;
+    padding-bottom: 45em;
     width: 100%;
   }
 
