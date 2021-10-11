@@ -9,6 +9,7 @@ import AnmtrBlock from './components/Anmtr/AnmtrBlock.svelte';
 import Cycle from './components/Cycle/Cycle.svelte';
 import Mind from './components/Mind/Mind.svelte';
 import ForgottenWords from './components/ForgottenWords/ForgottenWords.svelte';
+import Spin from './components/Spin/Spin.svelte';
 import TitleCard from './components/TitleCard/TitleCard.svelte';
 import './global.css';
 
@@ -264,9 +265,36 @@ const initMind = () => {
 };
 
 /*
-#anmtrNAMEjudy
+#mind
+"I just feel like I’m losing my mind.".
+*/
+const initSpin = () => {
+  selectMounts('spin').forEach(el => {
+    const followingParagraphEl = el.nextElementSibling;
+
+    if (!followingParagraphEl || followingParagraphEl.tagName !== 'P') {
+      return;
+    }
+
+    makeParagraphReplacement(el as unknown as HTMLElement);
+    el.setAttribute('data-spin', '');
+    new Spin({
+      target: el,
+      props: {
+        text: followingParagraphEl.textContent || ''
+      }
+    });
+  });
+};
+
+/*
+#anmtrNAMEadam
+---
+#anmtrNAMEbronwyn
 ---
 #anmtrNAMEfreya
+---
+#anmtrNAMEjudy
 */
 const initAnmtr = () => {
   selectMounts('anmtr').forEach(el => {
@@ -294,6 +322,7 @@ Promise.all([proxy('long-covid'), whenOdysseyLoaded]).then(() => {
     initCycle();
     initForgottenWords();
     initMind();
+    initSpin();
     initAnmtr();
   }
 });

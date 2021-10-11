@@ -1,0 +1,66 @@
+<script lang="ts" context="module">
+  const GRAPHIC_PATH = `${__webpack_public_path__}spin/graphic.svg`;
+</script>
+
+<script lang="ts">
+  import { getReadableProgressStore } from '@abcnews/progress-utils';
+  import type { Progress } from '@abcnews/progress-utils';
+  import type { Readable } from 'svelte/store';
+
+  export let text: string;
+
+  let [textBefore, textAfter] = text.split('spin');
+
+  let iframeEl: HTMLIFrameElement;
+  let isIFrameReady: boolean = false;
+  let progressStore: Readable<Progress> = getReadableProgressStore('spin', {
+    regionTop: 0.2,
+    regionBottom: 0.7,
+    indicatorSelector: `[data-spin]`
+  });
+
+  $: progress = $progressStore ? Math.min($progressStore.region, 0.999) : 0;
+  $: isIFrameReady &&
+    iframeEl.contentWindow &&
+    iframeEl.contentWindow.postMessage({ type: 'progress', payload: progress }, '*');
+</script>
+
+<p>
+  {textBefore}
+  <span>
+    <iframe
+      bind:this={iframeEl}
+      title="Graphic"
+      frameBorder="0"
+      scrolling="no"
+      src={`${GRAPHIC_PATH}?global=paused`}
+      on:load={() => (isIFrameReady = true)}
+    /><ins>spin</ins></span
+  >
+  {textAfter}
+</p>
+
+<style>
+  p {
+    width: 100%;
+  }
+
+  span {
+    position: relative;
+    display: inline-block;
+  }
+
+  iframe {
+    position: absolute;
+    top: -15.3em;
+    left: -9.6em;
+    width: 32.75em;
+    max-width: none;
+    height: 32.75em;
+    pointer-events: none;
+  }
+
+  ins {
+    opacity: 0;
+  }
+</style>
