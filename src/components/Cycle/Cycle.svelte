@@ -36,7 +36,6 @@
 <script lang="ts">
   import { getReadableProgressStore } from '@abcnews/progress-utils';
   import type { Progress } from '@abcnews/progress-utils';
-  import { spring } from 'svelte/motion';
   import type { Readable } from 'svelte/store';
 
   let clockIframeEl: HTMLIFrameElement;
@@ -49,14 +48,12 @@
     regionThreshold: 0.4,
     indicatorSelector: `[data-cycle]`
   });
-  let feverGraphicYOffset = spring(0);
 
   $: progress = $progressStore ? $progressStore.threshold : 0;
   $: clockGraphicProgress = progress ? ((progress * 25) % 10) / 10 : 0;
   $: isClockIframeReady &&
     clockIframeEl.contentWindow &&
     clockIframeEl.contentWindow.postMessage({ type: 'progress', payload: clockGraphicProgress }, '*');
-  $: feverGraphicYOffset.set(Math.min(progress * 2000, 70));
   $: feverGraphicProgress = progress ? Math.min(progress * 20, 0.99) : 0;
   $: isFeverIframeReady &&
     feverIframeEl.contentWindow &&
@@ -89,7 +86,7 @@
   </span>
   <iframe
     bind:this={feverIframeEl}
-    style={`transform:translate(-50%,${-50 + $feverGraphicYOffset}%)`}
+    class:fixed={feverGraphicProgress > 0}
     title="Fever Graphic"
     frameBorder="0"
     scrolling="no"
@@ -119,7 +116,7 @@
     transform: translateZ(0);
     z-index: 0;
     position: fixed;
-    top: 50%;
+    top: 40%;
     left: 50%;
     display: block;
   }
@@ -143,11 +140,14 @@
   }
 
   p > iframe {
-    will-change: transform;
     left: 50%;
     top: 0.75em;
     width: 28.5em;
     height: 28.5em;
-    transition: transform 0.25s linear;
+  }
+
+  p > iframe.fixed {
+    position: fixed;
+    top: calc(40% + 0.75em);
   }
 </style>
