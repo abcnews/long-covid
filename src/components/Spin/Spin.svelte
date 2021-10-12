@@ -14,8 +14,9 @@
   let iframeEl: HTMLIFrameElement;
   let isIFrameReady: boolean = false;
   let progressStore: Readable<Progress> = getReadableProgressStore('spin', {
-    regionTop: 0.2,
-    regionBottom: 0.7,
+    regionTop: 0,
+    regionThreshold: 0.2, // unused, but must be between regionTop and regionBottom
+    regionBottom: 0.4,
     indicatorSelector: `[data-spin]`
   });
 
@@ -52,12 +53,19 @@
 
   iframe {
     position: absolute;
-    top: -15.3em;
-    left: -9.6em;
+    top: -15.35em;
+    left: -9.55em;
     width: 32.75em;
     max-width: none;
     height: 32.75em;
     pointer-events: none;
+  }
+
+  @media (min-width: 700px) {
+    iframe {
+      top: -15.22em;
+      left: -9.6em;
+    }
   }
 
   ins {
