@@ -4,21 +4,19 @@
   import type { Readable } from 'svelte/store';
   import AnmtrLayer from './AnmtrLayer.svelte';
 
-  export let progressStore: Readable<Progress>;
   export let layers: Layer[] = [];
+  export let progressStore: Readable<Progress>;
+  export let stageHeight: number;
+  export let stageWidth: number;
 
-  let stageHeight: number;
-  let stageWidth: number;
-
-  $: progress = $progressStore ? $progressStore.envelope : 0;
+  $: progress = $progressStore ? $progressStore.threshold : 0;
 </script>
 
 <div
   class:before={progress === 0}
   class:during={progress > 0 && progress < 1}
   class:after={progress === 1}
-  bind:clientHeight={stageHeight}
-  bind:clientWidth={stageWidth}
+  style={`width:${stageWidth}px;height:${stageHeight}px`}
 >
   {#each [...layers].reverse() as layer (layer.id)}
     <AnmtrLayer {stageHeight} {stageWidth} {layer} {progress} />
@@ -27,27 +25,18 @@
 
 <style>
   div {
-    left: 0;
-    width: 100%;
-    height: 100vh;
-  }
-
-  .before,
-  .after {
+    transform: translate(-50%, -50%);
     position: absolute;
-  }
-
-  .before,
-  .during {
+    left: 50%;
     top: 0;
   }
 
   .during {
     position: fixed;
+    top: 50%;
   }
 
   .after {
-    top: auto;
-    bottom: 0;
+    top: 100%;
   }
 </style>
