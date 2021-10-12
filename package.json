@@ -1,6 +1,6 @@
 {
 	"name": "long-covid",
-	"version": "1.0.43",
+	"version": "1.0.44",
 	"description": "A project generated from aunty's svelte project template.",
 	"license": "MIT",
 	"private": true,
