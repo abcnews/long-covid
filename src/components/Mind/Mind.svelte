@@ -14,7 +14,7 @@
   let iframeEl: HTMLIFrameElement;
   let isIFrameReady: boolean = false;
   let progressStore: Readable<Progress> = getReadableProgressStore('mind', {
-    regionThreshold: 0.5,
+    regionThreshold: 0.4,
     indicatorSelector: `[data-mind]`
   });
 
@@ -41,7 +41,8 @@
 
 <style>
   p {
-    padding-bottom: 45em;
+    margin-bottom: 10em;
+    padding-bottom: 50em;
     width: 100%;
   }
 
@@ -52,15 +53,21 @@
 
   iframe {
     position: absolute;
-    top: -1.35em;
-    left: -25.62em;
-    width: 47.44em;
+    top: -1.42em;
+    left: -32.75em;
+    width: 61.672em;
     max-width: none;
-    height: 47.44em;
+    height: 61.672em;
     pointer-events: none;
     -webkit-mask-image: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 1) 3%, rgba(0, 0, 0, 1) 85%, rgba(0, 0, 0, 0));
     mask-image: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 1) 3%, rgba(0, 0, 0, 1) 85%, rgba(0, 0, 0, 0));
     transition: transform 0.25s linear;
+  }
+
+  @media (min-width: 700px) {
+    iframe {
+      top: -1.4em;
+    }
   }
 
   ins {
