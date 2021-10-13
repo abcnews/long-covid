@@ -126,16 +126,16 @@
     position: absolute;
     top: 0;
     left: 0;
-    width: 450px;
+    width: 540px;
     max-width: none;
-    height: 450px;
+    height: 540px;
     pointer-events: none;
   }
 
-  @media (min-width: 700px) {
-    iframe {
-      width: 540px;
-      height: 540px;
+  @media (max-width: 699px) {
+    span > iframe:first-child {
+      width: 450px;
+      height: 450px;
     }
   }
 
