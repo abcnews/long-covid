@@ -1,4 +1,4 @@
-import { Body, Engine, Render, Runner, Bodies, Composite, Common, Vector, Vertices, Svg } from 'matter-js';
+import { Body, Engine, Render, Runner, Bodies, Composite, Common, Vector, Svg } from 'matter-js';
 import decomp from 'poly-decomp';
 import DATA from './title-card.json';
 
@@ -19,6 +19,7 @@ const RENDER_OPTIONS = {
   wireframes: false,
   width: DATA.scene.w,
   height: DATA.scene.h,
+  pixelRatio: 1,
   background: '#fff'
 };
 
