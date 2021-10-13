@@ -99,7 +99,7 @@
 <style>
   p {
     position: relative;
-    padding-bottom: 300em; /* length = duration */
+    padding-bottom: 250em; /* length = duration */
     width: 100%;
   }
 
