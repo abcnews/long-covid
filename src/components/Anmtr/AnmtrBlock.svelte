@@ -5,7 +5,7 @@
   const STAGE_TO_BLOCK_HEIGHT_RATIOS = {
     adam: 1.5,
     bronwyn: 2,
-    freya: 3,
+    freya: 2,
     judy: 2
   };
   const ALTERNATIVE_TEXTS = {
