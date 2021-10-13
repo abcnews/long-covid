@@ -8,6 +8,14 @@
     freya: 3,
     judy: 2
   };
+  const ALTERNATIVE_TEXTS = {
+    adam: 'Image of Adam standing in front of a park looking at the Eiffel tower in the distance blurs into obscurity.',
+    bronwyn:
+      'Image 1 of young Bronwyn sitting on a stone wall overlooking a Croatian city blurs and transitions to Image 2 of an older Bronwyn sitting in a wheelchair by the road.',
+    freya:
+      'Image 1 of Freya standing in a European location wearing a black winter coat blurs and transitions to Image 2 of Freya sitting in a hospital bed wearing a face mask and gown.',
+    judy: 'Image 1 of smiling Judy holding her baby daughter on her shoulders in the park blurs and transitions to Image 2 of Judy looking sad while laying in bed with her two children.'
+  };
   const STAGE_WIDTH_HEIGHT_RATIO = (1 / 2) * 3;
 
   const fetchLayers = async (name: string): Promise<Layer[]> =>
@@ -51,7 +59,11 @@
 <svelte:window bind:innerWidth bind:innerHeight />
 
 {#if layers}
-  <div style={`margin:${stageHeight / 2}px 0;height:${blockHeight}px`}>
+  <div
+    style={`margin:${stageHeight / 2}px 0;height:${blockHeight}px`}
+    role={ALTERNATIVE_TEXTS[name] ? 'img' : 'presentation'}
+    aria-label={ALTERNATIVE_TEXTS[name] || undefined}
+  >
     <AnmtrStage {stageWidth} {stageHeight} {progressStore} {layers} />
   </div>
 {/if}
