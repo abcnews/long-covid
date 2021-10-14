@@ -1,7 +1,7 @@
 <script lang="ts" context="module">
   const IS_SAFARI = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
 
-  const GRAPHIC_PATH = `${__webpack_public_path__}mind${IS_SAFARI ? '__safari' : ''}/graphic.svg`;
+  const GRAPHIC_PATH = `${__webpack_public_path__}mind/graphic${IS_SAFARI ? '__safari' : ''}.svg`;
 </script>
 
 <script lang="ts">
