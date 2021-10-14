@@ -2,50 +2,12 @@ html:not(.is-dark-mode) {
   background-color: #fff;
 }
 
-html.can-change-mode {
-  transition: background-color 0.5s;
-}
-
-html.is-changing-mode {
-  background-color: var(--bg) !important;
-  transition-duration: 0s;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  html {
-    transition: background-color 2s;
-  }
-}
-
 .u-richtext > * {
   color: #000;
 }
 
 .u-richtext-invert > * {
   color: #fff !important;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  [class*='u-richtext'] > * {
-    transition: color 1.5s 0.25s;
-  }
-}
-
-html.is-changing-mode [class*='u-richtext'] > *,
-.Share-title {
-  color: var(--fg) !important;
-}
-
-html.can-change-mode a,
-html.can-change-mode .Quote p {
-  transition: color 0.5s;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  html.can-change-mode a,
-  html.can-change-mode .Quote p {
-    transition: color 1.5s 0.25s;
-  }
 }
 
 [data-component='SiteNavWithOverflow'] {
@@ -135,5 +97,40 @@ html.can-change-mode .Quote p {
 @media (min-width: 700px) {
   .Main > [data-paragraph-replacement] > p {
     line-height: 1.666666667;
+  }
+}
+
+/* Mode changing transitions */
+
+html.can-change-mode {
+  transition: background-color 0.5s;
+}
+
+html.is-changing-mode {
+  background-color: var(--bg) !important;
+  transition-duration: 0s;
+}
+
+html.is-changing-mode [class*='u-richtext'] > *,
+html.is-changing-mode a,
+html.is-changing-mode .Quote p,
+.Share-title {
+  color: var(--fg) !important;
+  transition: none !important;
+}
+
+/* Reduced motion overrides */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    transition: background-color 2s;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [class*='u-richtext'] > *,
+  html.can-change-mode a,
+  html.can-change-mode .Quote p {
+    transition: color 1.5s 0.25s;
   }
 }

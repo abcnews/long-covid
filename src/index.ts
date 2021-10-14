@@ -63,7 +63,10 @@ const MODE_TOGGLE_MOUNT_PREFIX = 'modetoggle';
 const MODE_TOGGLE_SELECTOR = `[data-mount][id^="${MODE_TOGGLE_MOUNT_PREFIX}"]`;
 const DARK_TO_LIGHT = interpolateLab('#000', '#fff');
 const LIGHT_TO_DARK = interpolateLab('#fff', '#000');
-const MODE_PROGRESS_TO_COLOR_INTERPOLATION_INPUT = scaleLinear([0.5, 0.7], [0, 1]);
+const MODE_PROGRESS_TO_COLOR_INTERPOLATION_INPUT = scaleLinear(
+  window.innerHeight > window.innerWidth ? [0.2, 1] : [0.4, 0.8],
+  [0, 1]
+);
 
 const initModeChanger = (prefersReducedMotion: boolean = false) => {
   const isInitiallyDarkMode = document.documentElement.className.indexOf('is-dark-mode') > -1;
@@ -174,10 +177,10 @@ const initModeChanger = (prefersReducedMotion: boolean = false) => {
 
         let fgColorInterpolationInput = 1 - colorInterpolationInput;
 
-        if (fgColorInterpolationInput > 0.4 && fgColorInterpolationInput < 0.5) {
-          fgColorInterpolationInput = 0.4;
-        } else if (fgColorInterpolationInput >= 0.5 && fgColorInterpolationInput < 0.6) {
-          fgColorInterpolationInput = 0.6;
+        if (fgColorInterpolationInput > 0.475 && fgColorInterpolationInput < 0.5) {
+          fgColorInterpolationInput = 0.475;
+        } else if (fgColorInterpolationInput >= 0.5 && fgColorInterpolationInput < 0.525) {
+          fgColorInterpolationInput = 0.525;
         }
 
         const colorScale =
