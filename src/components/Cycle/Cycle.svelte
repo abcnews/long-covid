@@ -1,8 +1,9 @@
 <script lang="ts" context="module">
   const IS_SAFARI = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+  const IS_IOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
 
   const BASE_PATH = `${__webpack_public_path__}cycle/`;
-  const CLOCK_GRAPHIC_PATH = `${BASE_PATH}clock${IS_SAFARI ? '__safari' : ''}.svg?global=paused`;
+  const CLOCK_GRAPHIC_PATH = `${BASE_PATH}clock${IS_SAFARI || IS_IOS ? '__safari' : ''}.svg?global=paused`;
   const FEVER_GRAPHIC_PATH = `${BASE_PATH}fever.svg?global=paused`;
   const TEXT_AND_PERSON_GRAPHIC_PATH = `${BASE_PATH}text_and_person.svg?global=paused`;
 
