@@ -64,10 +64,8 @@
     });
 
     // Preload images as blobs
-
-    await tick();
-
-    layers.forEach(preloadLayerBlob);
+    await Promise.all(layers.map(preloadLayerBlob));
+    layers = [...layers];
   });
 </script>
 
