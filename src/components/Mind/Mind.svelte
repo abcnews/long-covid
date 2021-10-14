@@ -26,17 +26,19 @@
 
 <p>
   {textBefore}
-  <span>
-    <iframe
-      bind:this={iframeEl}
-      title="Graphic"
-      frameBorder="0"
-      scrolling="no"
-      src={`${GRAPHIC_PATH}?global=paused`}
-      on:load={() => (isIFrameReady = true)}
-    /><ins>mind</ins></span
-  >
-  <span style={`opacity:${progress > 0 ? 0 : 1}`}>{textAfter}</span>
+  <bdo dir="ltr">
+    <span>
+      <iframe
+        bind:this={iframeEl}
+        title="Graphic"
+        frameBorder="0"
+        scrolling="no"
+        src={`${GRAPHIC_PATH}?global=paused`}
+        on:load={() => (isIFrameReady = true)}
+      /><ins>mind</ins></span
+    >
+    <span style={`opacity:${progress > 0 ? 0 : 1}`}>{textAfter}</span>
+  </bdo>
 </p>
 
 <style>
@@ -44,6 +46,10 @@
     margin-bottom: 25em;
     padding-bottom: 60em;
     width: 100%;
+  }
+
+  bdo {
+    white-space: nowrap;
   }
 
   span {
