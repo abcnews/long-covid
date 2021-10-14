@@ -23,7 +23,7 @@
     "widthConstraint": { "min": 0, "max": 625, "target": 100 },
     "heightConstraint": { "min": 0, "max": 100, "target": 100 },
     "objectFit": "fill",
-    "src": "https://preview-production.wcms.abc-cdn.net.au/5d9ec3c7acfce4a23c27b64be2170c93?src"
+    "src": "https://live-production.wcms.abc-cdn.net.au/5d9ec3c7acfce4a23c27b64be2170c93?src"
   },
   {
     "name": "Pre covid",
@@ -49,6 +49,6 @@
     "widthConstraint": { "min": 0, "max": 625, "target": 100 },
     "heightConstraint": { "min": 0, "max": 100, "target": 100 },
     "objectFit": "fill",
-    "src": "https://preview-production.wcms.abc-cdn.net.au/c7cb5179f6f9376e0af4794ca57a8b6f?src"
+    "src": "https://live-production.wcms.abc-cdn.net.au/c7cb5179f6f9376e0af4794ca57a8b6f?src"
   }
 ]
