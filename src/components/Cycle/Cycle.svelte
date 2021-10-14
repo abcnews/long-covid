@@ -132,10 +132,15 @@
     pointer-events: none;
   }
 
-  @media (max-width: 699px) {
+  span > iframe:first-child {
+    width: 450px;
+    height: 450px;
+  }
+
+  @media (min-width: 700px) {
     span > iframe:first-child {
-      width: 450px;
-      height: 450px;
+      width: 720px;
+      height: 720px;
     }
   }
 
