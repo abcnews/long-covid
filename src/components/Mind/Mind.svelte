@@ -60,8 +60,8 @@
     max-width: none;
     height: 85.392em;
     pointer-events: none;
-    /* -webkit-mask-image: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 1) 2%, rgba(0, 0, 0, 1) 90%, rgba(0, 0, 0, 0)); */
-    /* mask-image: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 1) 2%, rgba(0, 0, 0, 1) 90%, rgba(0, 0, 0, 0)); */
+    -webkit-mask-image: linear-gradient(rgba(0, 0, 0, 1) 95%, rgba(0, 0, 0, 0));
+    mask-image: linear-gradient(rgba(0, 0, 0, 1) 95%, rgba(0, 0, 0, 0));
   }
 
   @media (min-width: 700px) {
