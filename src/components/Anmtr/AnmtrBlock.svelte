@@ -2,6 +2,9 @@
   import type { Layer } from '@abcnews/anmtr/types';
 
   const BASE_PATH = `${__webpack_public_path__}anmtr/`;
+  const NAMES_TO_FILE_NAMES = {
+    adam: 'attia'
+  };
   const STAGE_TO_BLOCK_HEIGHT_RATIOS = {
     adam: 1.5,
     bronwyn: 2,
@@ -19,7 +22,7 @@
   const STAGE_WIDTH_HEIGHT_RATIO = (1 / 2) * 3;
 
   const fetchLayers = async (name: string): Promise<Layer[]> =>
-    fetch(`${BASE_PATH}${name}.json`).then(response => response.json());
+    fetch(`${BASE_PATH}${NAMES_TO_FILE_NAMES[name] || name}.json`).then(response => response.json());
 
   const preloadLayerBlob = async (layer: Layer) => {
     if (layer.src) {
