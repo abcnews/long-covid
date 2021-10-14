@@ -20,12 +20,21 @@
 
   const fetchLayers = async (name: string): Promise<Layer[]> =>
     fetch(`${BASE_PATH}${name}.json`).then(response => response.json());
+
+  const preloadLayerBlob = async (layer: Layer) => {
+    if (layer.src) {
+      const response = await fetch(layer.src);
+      const blob = await response.blob();
+
+      layer.src = URL.createObjectURL(blob);
+    }
+  };
 </script>
 
 <script lang="ts">
   import { getReadableProgressStore } from '@abcnews/progress-utils';
   import type { Progress } from '@abcnews/progress-utils';
-  import { onMount } from 'svelte';
+  import { onMount, tick } from 'svelte';
   import type { Readable } from 'svelte/store';
   import AnmtrStage from './AnmtrStage.svelte';
 
@@ -53,6 +62,12 @@
       indicatorSelector: `[data-anmtr="${name}"]>*`,
       regionThreshold: 0.5
     });
+
+    // Preload images as blobs
+
+    await tick();
+
+    layers.forEach(preloadLayerBlob);
   });
 </script>
 
