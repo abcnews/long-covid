@@ -42,7 +42,7 @@ html:not(.is-dark-mode) {
 }
 
 .Main .Header-media {
-  padding-top: 5vh;
+  padding-top: 40px;
   max-height: none !important;
   background-color: #fff;
 }
