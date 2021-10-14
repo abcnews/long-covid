@@ -57,7 +57,7 @@
   $: isClockIframeReady &&
     clockIframeEl.contentWindow &&
     clockIframeEl.contentWindow.postMessage({ type: 'progress', payload: clockGraphicProgress }, '*');
-  $: feverGraphicProgress = progress ? Math.min(progress * 20, 0.99) : 0;
+  $: feverGraphicProgress = progress ? Math.min(progress * 20, 0.999) : 0;
   $: isFeverIframeReady &&
     feverIframeEl.contentWindow &&
     feverIframeEl.contentWindow.postMessage({ type: 'progress', payload: feverGraphicProgress }, '*');
