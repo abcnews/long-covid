@@ -41,8 +41,8 @@
 
 <style>
   p {
-    margin-bottom: 10em;
-    padding-bottom: 50em;
+    margin-bottom: 25em;
+    padding-bottom: 60em;
     width: 100%;
   }
 
@@ -52,21 +52,21 @@
   }
 
   iframe {
+    z-index: -1;
     position: absolute;
     top: -1.42em;
-    left: -32.75em;
-    width: 61.672em;
+    left: -44.625em;
+    width: 85.392em;
     max-width: none;
-    height: 61.672em;
+    height: 85.392em;
     pointer-events: none;
-    -webkit-mask-image: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 1) 3%, rgba(0, 0, 0, 1) 85%, rgba(0, 0, 0, 0));
-    mask-image: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 1) 3%, rgba(0, 0, 0, 1) 85%, rgba(0, 0, 0, 0));
-    transition: transform 0.25s linear;
+    /* -webkit-mask-image: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 1) 2%, rgba(0, 0, 0, 1) 90%, rgba(0, 0, 0, 0)); */
+    /* mask-image: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 1) 2%, rgba(0, 0, 0, 1) 90%, rgba(0, 0, 0, 0)); */
   }
 
   @media (min-width: 700px) {
     iframe {
-      top: -1.4em;
+      top: -1.38em;
     }
   }
 
