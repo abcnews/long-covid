@@ -7,7 +7,7 @@ import { interpolateLab } from 'd3-interpolate';
 import { scaleLinear } from 'd3-scale';
 import AnmtrBlock from './components/Anmtr/AnmtrBlock.svelte';
 import Cycle from './components/Cycle/Cycle.svelte';
-import { HAS_OPTED_OUT } from './components/MotionPreference';
+import { HAS_OPTED_OUT, incrementCounter } from './components/MotionPreference';
 import MotionPreference from './components/MotionPreference/MotionPreference.svelte';
 import Mind from './components/Mind/Mind.svelte';
 import ForgottenWords from './components/ForgottenWords/ForgottenWords.svelte';
@@ -325,10 +325,14 @@ const initAnmtr = () => {
 };
 
 Promise.all([proxy('long-covid'), whenOdysseyLoaded]).then(() => {
+  incrementCounter('page-load');
+
   let prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   if (!prefersReducedMotion) {
     initMotionPreference();
+  } else {
+    incrementCounter('auto-enable');
   }
 
   prefersReducedMotion = prefersReducedMotion || !!HAS_OPTED_OUT;
