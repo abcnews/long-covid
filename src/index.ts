@@ -23,6 +23,12 @@ const makeParagraphReplacement = (el: HTMLElement) => {
 
 const initMotionPreference = () => {
   selectMounts('motionpreference').forEach(el => {
+    const followingParagraphEl = el.nextElementSibling;
+
+    if (followingParagraphEl && followingParagraphEl.tagName === 'P') {
+      followingParagraphEl.classList.add('u-dropcap');
+    }
+
     new MotionPreference({
       target: el,
       props: {}
