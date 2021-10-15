@@ -306,6 +306,7 @@ const initAnmtr = () => {
   selectMounts('anmtr').forEach(el => {
     const name = getMountValue(el).split('NAME')[1];
 
+    el.setAttribute('data-image-replacement', '');
     el.setAttribute('data-anmtr', name);
     el.classList.add('u-full');
     new AnmtrBlock({

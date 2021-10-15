@@ -100,6 +100,13 @@ html:not(.is-dark-mode) {
   }
 }
 
+.Main > [data-image-replacement] + div,
+.Main > [data-image-replacement] + figure,
+.Main > [data-image-replacement] + div + div,
+.Main > [data-image-replacement] + div + figure {
+  display: none;
+}
+
 /* Mode changing transitions */
 
 html.can-change-mode {
@@ -117,20 +124,4 @@ html.is-changing-mode .Quote p,
 .Share-title {
   color: var(--fg) !important;
   transition: none !important;
-}
-
-/* Reduced motion overrides */
-
-@media (prefers-reduced-motion: reduce) {
-  html {
-    transition: background-color 2s;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  [class*='u-richtext'] > *,
-  html.can-change-mode a,
-  html.can-change-mode .Quote p {
-    transition: color 1.5s 0.25s;
-  }
 }
