@@ -53,6 +53,6 @@
 		"matter-js": "^0.17.1",
 		"pathseg": "^1.2.1",
 		"poly-decomp": "^0.3.0",
-		"svelte": "^3.43.0"
+		"svelte": "^3.43.2"
 	}
 }

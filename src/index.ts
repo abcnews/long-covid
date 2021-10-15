@@ -7,6 +7,8 @@ import { interpolateLab } from 'd3-interpolate';
 import { scaleLinear } from 'd3-scale';
 import AnmtrBlock from './components/Anmtr/AnmtrBlock.svelte';
 import Cycle from './components/Cycle/Cycle.svelte';
+import { HAS_OPTED_OUT } from './components/MotionPreference';
+import MotionPreference from './components/MotionPreference/MotionPreference.svelte';
 import Mind from './components/Mind/Mind.svelte';
 import ForgottenWords from './components/ForgottenWords/ForgottenWords.svelte';
 import Spin from './components/Spin/Spin.svelte';
@@ -17,6 +19,15 @@ const makeParagraphReplacement = (el: HTMLElement) => {
   el.setAttribute('data-paragraph-replacement', '');
   el.setAttribute('aria-hidden', 'true');
   el.setAttribute('role', 'presentation');
+};
+
+const initMotionPreference = () => {
+  selectMounts('motionpreference').forEach(el => {
+    new MotionPreference({
+      target: el,
+      props: {}
+    });
+  });
 };
 
 const initTitleCard = (prefersReducedMotion: boolean = false) => {
@@ -315,7 +326,13 @@ const initAnmtr = () => {
 };
 
 Promise.all([proxy('long-covid'), whenOdysseyLoaded]).then(() => {
-  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  if (!prefersReducedMotion) {
+    initMotionPreference();
+  }
+
+  prefersReducedMotion = prefersReducedMotion || !!HAS_OPTED_OUT;
 
   initTitleCard(prefersReducedMotion);
   initCenteredParagraphs();
