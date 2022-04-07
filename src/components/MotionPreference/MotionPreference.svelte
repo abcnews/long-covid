@@ -6,11 +6,15 @@
   <aside>
     <p>
       {#if HAS_OPTED_OUT}
-        You have chosen to view this story without high-motion graphics or flashing background colour changes, but you
-        may <button on:click={optIn}>re-enable them</button>
+        You have chosen to view this story without high-motion graphics or background effects which may affect viewers
+        who are susceptible to photosensitive epilepsy or other photo sensitivities, but you may <button
+          on:click={optIn}>re-enable them</button
+        >
       {:else}
-        This story includes high-motion illustrative elements and background colour changes that flash from light to
-        dark. If you prefer, you may <button on:click={optOut}>read the story without them</button>
+        This story includes high-motion illustrative elements and background effects which may affect viewers who are
+        susceptible to photosensitive epilepsy or other photo sensitivities. If you prefer, you may <button
+          on:click={optOut}>read the story without them</button
+        >
       {/if}
     </p>
   </aside>
