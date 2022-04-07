@@ -85,7 +85,7 @@ const MODE_PROGRESS_TO_COLOR_INTERPOLATION_INPUT = scaleLinear(
   [0, 1]
 );
 
-const initModeChanger = () => {
+const initModeChanger = (prefersReducedMotion: boolean) => {
   const isInitiallyDarkMode = document.documentElement.className.indexOf('is-dark-mode') > -1;
   const initialRichtextEls = Array.from(document.querySelectorAll('.u-richtext'));
   const initialRichtextInvertEls = Array.from(document.querySelectorAll('.u-richtext-invert'));
@@ -100,6 +100,10 @@ const initModeChanger = () => {
     'modetoggles',
     message => {
       if (message.type !== 'state') {
+        return;
+      }
+
+      if (prefersReducedMotion) {
         return;
       }
 
@@ -166,6 +170,10 @@ const initModeChanger = () => {
       `modetransition_${index}`,
       message => {
         if (message.type !== 'progress') {
+          return;
+        }
+
+        if (prefersReducedMotion) {
           return;
         }
 
@@ -339,7 +347,7 @@ Promise.all([proxy('long-covid'), whenOdysseyLoaded]).then(() => {
 
   initTitleCard(prefersReducedMotion);
   initCenteredParagraphs();
-  initModeChanger();
+  initModeChanger(prefersReducedMotion);
 
   if (!prefersReducedMotion) {
     initCycle();

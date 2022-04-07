@@ -6,15 +6,11 @@
   <aside>
     <p>
       {#if HAS_OPTED_OUT}
-        You have chosen to view this story without high-motion graphics, but you may <a
-          href={undefined}
-          on:click={optIn}>re-enable them</a
-        >
+        You have chosen to view this story without high-motion graphics or flashing background colour changes, but you
+        may <button on:click={optIn}>re-enable them</button>
       {:else}
-        This story includes high-motion illustrative elements. If you prefer, you may <a
-          href={undefined}
-          on:click={optOut}>read the story without them</a
-        >
+        This story includes high-motion illustrative elements and background colour changes that flash from light to
+        dark. If you prefer, you may <button on:click={optOut}>read the story without them</button>
       {/if}
     </p>
   </aside>
@@ -39,9 +35,15 @@
     text-align: center;
   }
 
-  a {
+  button {
     font-weight: bold;
     white-space: nowrap;
     cursor: pointer;
+    border: none;
+    display: inline;
+    padding: 0;
+    background: none;
+    color: currentColor;
+    text-decoration: underline;
   }
 </style>
